@@ -55,7 +55,7 @@ async function coronaVirus() {
 
     const dataMortes = [];
     data.Brazil.forEach((item, i) => {
-        dataMortes.unshift(converterData(data.Brazil[i].date));
+        dataMortes.unshift(converterData(data.Brazil[i].date).slice(0, 5));
     });
 
     const totalMortesBrasil = [];
@@ -75,15 +75,43 @@ async function coronaVirus() {
 
     const totalMortesUS = [];
     data.US.forEach((item, i) => {
-        totalMortesUS.unshift(data.US[i].deaths);
+        totalMortesUS.unshift((data.US[i].deaths));
     });
 
+    const morteMes = [
+        [
+            data.Brazil[9].deaths,
+            data.Brazil[29].deaths,
+            data.Brazil[69].deaths,
+            data.Brazil[data.Brazil.length - 1].deaths,
+        ],
+        [
+            data.China[9].deaths,
+            data.China[29].deaths,
+            data.China[69].deaths,
+            data.China[data.Brazil.length - 1].deaths,
+        ],
+        [
+            data.US[9].deaths,
+            data.US[29].deaths,
+            data.US[69].deaths,
+            data.US[data.Brazil.length - 1].deaths,
+        ],
+        [
+            data.Italy[9].deaths,
+            data.Italy[29].deaths,
+            data.Italy[69].deaths,
+            data.Italy[data.Brazil.length - 1].deaths,
+        ]
+    ]
+
     const dados = [
-        dataMortes.reverse(),
+        dataMortes.reverse(), // são arrays retornados do forEach
         totalMortesBrasil.reverse(),
         totalMortesItalia.reverse(),
         totalMortesChina.reverse(),
         totalMortesUS.reverse(),
+        morteMes
     ]
     return dados;
 }
@@ -91,10 +119,10 @@ async function coronaVirus() {
 async function handleResults(mortes) {
     const mortesBrasil = await Promise.resolve(mortes);
 
-    Chart.defaults.global.elements.line.borderWidth = 6;
-    Chart.defaults.global.elements.point.borderWidth = 10;
+    Chart.defaults.global.elements.line.borderWidth = 3;
+    Chart.defaults.global.elements.point.borderWidth = 3;
     Chart.defaults.global.elements.point.hoverBorderWidth = 10;
-    // Chart.defaults.global.defaultFontSize = 40;
+    Chart.defaults.global.defaultFontSize = 20;
 
     const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
@@ -159,7 +187,71 @@ async function handleResults(mortes) {
             },
             title: {
                 display: true,
-                text: 'Mortes por Coronavírus',
+                text: 'Total de mortos por Coronavírus ao dia',
+                fontSize: 50,
+                fontColor: '#f00',
+            },
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    fontColor: '#000',
+                }
+            }
+        }
+    });
+
+    // barra:
+    const ctx2 = document.getElementById('2myChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril'],
+            datasets: [{
+                label: 'Brasil',
+                data: mortesBrasil[5][0],
+                backgroundColor: [
+                    'green', 'green', 'green', 'green'
+                ]
+            },
+            {
+                label: 'China',
+                data: mortesBrasil[5][1],
+                backgroundColor: [
+                    'red', 'red', 'red', 'red'
+                ]
+            },
+            {
+                label: 'Estados Unidos',
+                data: mortesBrasil[5][2],
+                backgroundColor: [
+                    'blue', 'blue', 'blue', 'blue'
+                ]
+            },
+            {
+                label: 'Itália',
+                data: mortesBrasil[5][3],
+                backgroundColor: [
+                    'orange', 'orange', 'orange', 'orange'
+                ]
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+                caretSize: 20,
+            },
+            title: {
+                display: true,
+                text: 'Total de mortos por Coronavírus ao Mês',
                 fontSize: 50,
                 fontColor: '#f00',
             },
@@ -173,44 +265,3 @@ async function handleResults(mortes) {
     });
 }
 handleResults(coronaVirus());
-
-
-
-// barra:
-var ctx = document.getElementById('2myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
