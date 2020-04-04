@@ -52,17 +52,38 @@ const hoje = dia.toString().padStart(2, '0') + '/' + mes.toString().padStart(2, 
 async function coronaVirus() {
     const res = await fetch('https://pomber.github.io/covid19/timeseries.json');
     const data = await res.json();
+
+    const dataMortes = [];
     data.Brazil.forEach((item, i) => {
-        data.Brazil[i].date;
-        console.log(data.Brazil[i].date);
+        dataMortes.unshift(converterData(data.Brazil[i].date));
     });
+
+    const totalMortesBrasil = [];
+    data.Brazil.forEach((item, i) => {
+        totalMortesBrasil.unshift(data.Brazil[i].deaths);
+    });
+
+    const totalMortesItalia = [];
+    data.Italy.forEach((item, i) => {
+        totalMortesItalia.unshift(data.Italy[i].deaths);
+    });
+
+    const totalMortesChina = [];
+    data.China.forEach((item, i) => {
+        totalMortesChina.unshift(data.China[i].deaths);
+    });
+
+    const totalMortesUS = [];
+    data.US.forEach((item, i) => {
+        totalMortesUS.unshift(data.US[i].deaths);
+    });
+
     const dados = [
-        [
-            data.Brazil[9].deaths,
-            data.Brazil[38].deaths,
-            data.Brazil[69].deaths,
-            data.Brazil[data.Brazil.length - 1].deaths,
-        ]
+        dataMortes.reverse(),
+        totalMortesBrasil.reverse(),
+        totalMortesItalia.reverse(),
+        totalMortesChina.reverse(),
+        totalMortesUS.reverse(),
     ]
     return dados;
 }
@@ -71,9 +92,9 @@ async function handleResults(mortes) {
     const mortesBrasil = await Promise.resolve(mortes);
 
     Chart.defaults.global.elements.line.borderWidth = 6;
-    Chart.defaults.global.elements.point.borderWidth = 20;
+    Chart.defaults.global.elements.point.borderWidth = 10;
     Chart.defaults.global.elements.point.hoverBorderWidth = 10;
-    Chart.defaults.global.defaultFontSize = 40;
+    // Chart.defaults.global.defaultFontSize = 40;
 
     const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
@@ -82,27 +103,27 @@ async function handleResults(mortes) {
 
         // The data for our dataset
         data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril'],
+            labels: mortesBrasil[0],
             datasets: [{
                 label: 'Brasil',
                 backgroundColor: 'transparent',
                 borderColor: '#006d1c',
-                data: [0, 20, 15, 933],
+                data: mortesBrasil[1],
             }, {
                 label: 'China',
                 backgroundColor: 'transparent',
                 borderColor: '#f00',
-                data: mortesBrasil[0],
+                data: mortesBrasil[3],
             }, {
                 label: 'Estados Unidos',
                 backgroundColor: 'transparent',
                 borderColor: '#00f',
-                data: [0, 30, 20, 44],
+                data: mortesBrasil[4],
             }, {
                 label: 'Itália',
                 backgroundColor: 'transparent',
                 borderColor: 'orange',
-                data: [0, 60, 20, 44],
+                data: mortesBrasil[2],
             }]
         },
 
