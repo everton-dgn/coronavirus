@@ -27,8 +27,25 @@ fetch("https://covid19-brazil-api.now.sh/api/report/v1")
     .then(response => response.json())
     .then(data => {
         data.data.forEach((item) => {
-            $('[data-tabela]').innerHTML += '<tr><td>' + item.state + '</td>' + '<td>' + item.cases + '</td>' + '<td>' + item.deaths + '</td>' + '<td>' + item.suspects + '</td>' + '</tr>';
+            $('[data-tabela]').innerHTML += '<tr title="' + item.state + '"><td>' + item.state + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + item.deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + item.suspects.toLocaleString('pt-BR') + '</td>' + '<td>' + Math.ceil(item.deaths * 100 / item.cases) + '%' + '</td>' + '</tr>';
         });
+
+        // click no estado do mapa exibe dados do estado :
+        $$('a').forEach(item => item.addEventListener('click', estadosBrasileiros));
+
+        function estadosBrasileiros(e) {
+            e.preventDefault();
+            const nomedoEstado = this.getAttribute("title");
+            $('[data-info-mapa] h1').innerHTML = nomedoEstado;
+
+            for (let i = 1; i < 28; i++) {
+                $$('tr')[i].getAttribute('title');
+                if ($$('tr')[i].getAttribute('title') == nomedoEstado) {
+                    $('[data-info-mapa] table').innerHTML = '<tr>' + $$('tr')[0].innerHTML + '</tr>' + '<tr>' + $$('tr')[i].innerHTML + '</tr>';
+                }
+                console.log($$('tr')[i].innerHTML);
+            }
+        }
     });
 
 // função para converter data
@@ -123,6 +140,13 @@ async function handleResults(mortes) {
     Chart.defaults.global.elements.point.borderWidth = 3;
     Chart.defaults.global.elements.point.hoverBorderWidth = 10;
     Chart.defaults.global.defaultFontSize = 20;
+    Chart.defaults.global.responsive = true;
+    // Chart.defaults.global.tooltips.mode = 'label';
+    // Chart.defaults.global.tooltips.backgroundColor = '#fff';
+    // Chart.defaults.global.tooltips.titleColor = '#888';
+    // Chart.defaults.global.tooltips.bodyColor = '#888';
+    // Chart.defaults.global.animation.duration = 1500;
+    // Chart.defaults.global.animation.easing = 'easeInOutQuart';
 
     const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
@@ -137,6 +161,14 @@ async function handleResults(mortes) {
                 backgroundColor: 'transparent',
                 borderColor: '#006d1c',
                 data: mortesBrasil[1],
+                // borderColor: "rgba(220,220,220,1)",
+                // pointBorderColor: "rgba(220,220,220,1)",
+                // pointBackgroundColor: "#222",
+                // pointBorderWidth: 1,
+                // pointHoverRadius: 5,
+                // pointHoverBackgroundColor: "rgba(220,220,220,1)",
+                // pointHoverBorderColor: "rgba(220,220,220,1)",
+                // pointHoverBorderWidth: 2,
             }, {
                 label: 'China',
                 backgroundColor: 'transparent',
@@ -157,8 +189,24 @@ async function handleResults(mortes) {
 
         // Configuration options go here
         options: {
+            elements: {
+                line: {
+                    tension: 0 // define se a linha é reta ou curva
+                }
+            },
             scales: {
                 yAxes: [{
+                    display: true,
+                    color: 'blue',
+                    ticks: {
+                        // fontStyle: "bold",
+                        // fontColor: "#red", // cor dos valores eixo y
+                        beginAtZero: true,
+                        stepSize: 1000,
+                        padding: 10,
+                        // max: 100,
+                        // min: 0
+                    },
                     scaleLabel: {
                         display: true,
                         labelString: 'Total de Mortos',
@@ -166,9 +214,21 @@ async function handleResults(mortes) {
                     },
                     gridLines: {
                         color: '#ccc',
+                        zeroLineColor: "#000", // cor do eixo
+                        // lineWidth: 22 // expessura da linha guia horizontal
+                        tickMarkLength: 0, // linha guia pra fora do eixo
+                        // z: 0 // z-index of gridline layer. Values <= 0 are drawn under datasets, > 0 on top.
                     }
                 }],
                 xAxes: [{
+                    // display: false,
+                    ticks: {
+                        beginAtZero: true,
+                        padding: 10,
+                        // maxTicksLimit: 20 // limite de linhas guias exibidas
+                        // max: 100,
+                        // min: 0
+                    },
                     scaleLabel: {
                         display: true,
                         labelString: 'Dias',
@@ -176,10 +236,13 @@ async function handleResults(mortes) {
                     },
                     gridLines: {
                         color: '#ccc',
+                        zeroLineColor: "red",
+                        tickMarkLength: 0, // linha guia pra fora do eixo
+                        // zeroLineColor: "#000",
+                        // zeroLineWidth: 2
                     }
                 }]
             },
-            responsive: true,
             tooltips: {
                 mode: 'index',
                 intersect: false,
@@ -218,7 +281,10 @@ async function handleResults(mortes) {
                 data: mortesBrasil[5][1],
                 backgroundColor: [
                     'red', 'red', 'red', 'red'
-                ]
+                ],
+                // borderColor: '#000',
+                // borderWidth: 6,
+                // hoverBorderColor : 'blue'
             },
             {
                 label: 'Estados Unidos',
@@ -264,4 +330,8 @@ async function handleResults(mortes) {
         }
     });
 }
+
 handleResults(coronaVirus());
+
+
+
