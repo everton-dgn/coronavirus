@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Documento</title>
+    <meta name="author" content="Éverton Toffanetto">
+    <meta name="copyright" content="© Éverton Toffanetto">
     <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
     <!-- <link rel="stylesheet" href="style.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <meta name="author" content="Éverton Toffanetto">
-    <meta name="copyright" content="© Éverton Toffanetto">
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
     <style>
         table {
@@ -28,10 +29,6 @@
 
         tbody:nth-child(even) {
             background-color: #dddddd;
-        }
-
-        [data-quadro] {
-            display: flex;
         }
 
         #svg-map path {
@@ -79,31 +76,21 @@
     <div>
         <h1>Corona Vírus no Brasil - Dados atualizados em tempo real</h1>
         <p data-date></p>
-        <p data-suspects></p>
         <p data-confirmed></p>
         <p data-deaths></p>
+        <p data-mortalidade></p>
     </div>
 
     <canvas id="2myChart"></canvas>
     <canvas id="myChart"></canvas>
+    <canvas id="3myChart"></canvas>
 
     <div data-quadro>
-        <div>
-            <h2>Casos por Estado:</h2>
-            <table data-tabela>
-                <tr>
-                    <th>ESTADO</th>
-                    <th>CASOS CONFIRMADOS</th>
-                    <th>TOTAL DE MORTOS</th>
-                    <th>CASOS SUSPEITOS</th>
-                    <th>TAXA % DE MORTALIDADE</th>
-                </tr>
-            </table>
-        </div>
-
         <div data-info-mapa>
-            <h1>Clique em um dos estados</h1>
-            <table></table>
+            <div>
+                <h1>Clique em um dos estados</h1>
+                <table></table>
+            </div>
             <svg version="1.1" id="svg-map" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="450px" height="460px"
                 viewBox="0 0 450 460" enable-background="new 0 0 450 460" xml:space="preserve">
@@ -426,6 +413,30 @@
                     </a>
                 </g>
             </svg>
+        </div>
+
+        <div>
+            <h2>Casos por Estado:</h2>
+            <table data-tabela>
+                <tr>
+                    <th>ESTADO</th>
+                    <th>CASOS CONFIRMADOS</th>
+                    <th>TOTAL DE MORTOS</th>
+                    <th>TAXA % DE MORTALIDADE</th>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h2>Casos por País:</h2>
+            <table data-pais>
+                <tr>
+                    <th>PAÍS</th>
+                    <th>CASOS CONFIRMADOS</th>
+                    <th>TOTAL DE MORTOS</th>
+                    <th>TAXA % DE MORTALIDADE</th>
+                </tr>
+            </table>
         </div>
     </div>
 

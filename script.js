@@ -3,31 +3,46 @@ const $$ = document.querySelectorAll.bind(document);
 
 // corona virus
 const date = $('[data-date]');
-const suspects = $('[data-suspects]');
 const confirmed = $('[data-confirmed]');
 const deaths = $('[data-deaths]');
+const mortalidade = $('[data-mortalidade]');
+const tabela = $('[data-tabela]');
 
-function coronaVirus2() {
+function coronaVirus() {
     fetch('https://covid19-brazil-api.now.sh/api/report/v1/brazil')
         .then(r => r.json())
         .then(data => {
             date.innerHTML = 'Até a Data Atual: <b>' + hoje + '</b>';
-            suspects.innerHTML = 'Casos Suspeitos: <b>' + data.data.confirmed.toLocaleString('pt-BR') + '</b>';
-            confirmed.innerHTML = 'Casos Confirmados: <b>' + data.data.cases.toLocaleString('pt-BR') + '</b>';
+            confirmed.innerHTML = 'Casos Confirmados: <b>' + data.data.confirmed.toLocaleString('pt-BR') + '</b>';
             deaths.innerHTML = 'Total de Mortos: <b>' + data.data.deaths.toLocaleString('pt-BR') + '</b>';
+            mortalidade.innerHTML = 'Taxa % de Mortalidade: <b>' + parseFloat((data.data.deaths * 100 / data.data.confirmed).toFixed(1)) + '%' + '</b>';
         });
 }
-coronaVirus2();
-setInterval(() => coronaVirus2(), 1000 * 60 * 60);
+coronaVirus();
+
+// mostra data atual:
+const agora = new Date();
+const dia = agora.getDate();
+const mes = agora.getUTCMonth() + 1;
+const ano = agora.getUTCFullYear();
+const hoje = dia.toString().padStart(2, '0') + '/' + mes.toString().padStart(2, '0') + '/' + ano;
+
+// função para converter data
+function converterData(dataPar) {
+    const dataRecebida = dataPar.replace('-', '/').replace('-', '/').replace('T', ' ').split(' ');
+    const dataTratada = dataRecebida[0].split('/');
+
+    const dataAtual = dataTratada[2].padStart(2, '0') + '/' + dataTratada[1].padStart(2, '0') + '/' + dataTratada[0];
+
+    return dataAtual;
+}
 
 // tabela
-const tabela = $('[data-tabela]');
-
 fetch("https://covid19-brazil-api.now.sh/api/report/v1")
     .then(response => response.json())
     .then(data => {
         data.data.forEach((item) => {
-            $('[data-tabela]').innerHTML += '<tr title="' + item.state + '"><td>' + item.state + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + item.deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + item.suspects.toLocaleString('pt-BR') + '</td>' + '<td>' + Math.ceil(item.deaths * 100 / item.cases) + '%' + '</td>' + '</tr>';
+            $('[data-tabela]').innerHTML += '<tr title="' + item.state + '"><td>' + item.state + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + item.deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((item.deaths * 100 / item.cases).toFixed(1)) + '%' + '</td>' + '</tr>';
         });
 
         // click no estado do mapa exibe dados do estado :
@@ -43,30 +58,12 @@ fetch("https://covid19-brazil-api.now.sh/api/report/v1")
                 if ($$('tr')[i].getAttribute('title') == nomedoEstado) {
                     $('[data-info-mapa] table').innerHTML = '<tr>' + $$('tr')[0].innerHTML + '</tr>' + '<tr>' + $$('tr')[i].innerHTML + '</tr>';
                 }
-                console.log($$('tr')[i].innerHTML);
             }
         }
     });
 
-// função para converter data
-function converterData(dataPar) {
-    const dataRecebida = dataPar.replace('-', '/').replace('-', '/').replace('T', ' ').split(' ');
-    const dataTratada = dataRecebida[0].split('/');
-
-    const dataAtual = dataTratada[2].padStart(2, '0') + '/' + dataTratada[1].padStart(2, '0') + '/' + dataTratada[0];
-
-    return dataAtual;
-}
-
-// mostra data atual:
-const agora = new Date();
-const dia = agora.getDate();
-const mes = agora.getUTCMonth() + 1;
-const ano = agora.getUTCFullYear();
-const hoje = dia.toString().padStart(2, '0') + '/' + mes.toString().padStart(2, '0') + '/' + ano;
-
 // fecth para gráfico
-async function coronaVirus() {
+async function coronaVirus2() {
     const res = await fetch('https://pomber.github.io/covid19/timeseries.json');
     const data = await res.json();
 
@@ -120,6 +117,13 @@ async function coronaVirus() {
             data.Italy[69].deaths,
             data.Italy[data.Brazil.length - 1].deaths,
         ]
+    ];
+
+    const morteTaxaPaises = [
+        parseFloat((data.Brazil[data.Brazil.length - 1].deaths*100/data.Brazil[data.Brazil.length - 1].confirmed).toFixed(1)),
+        parseFloat((data.China[data.China.length - 1].deaths*100/data.China[data.China.length - 1].confirmed).toFixed(1)),
+        parseFloat((data.US[data.US.length - 1].deaths*100/data.US[data.US.length - 1].confirmed).toFixed(1)),
+        parseFloat((data.Italy[data.Italy.length - 1].deaths*100/data.Italy[data.Italy.length - 1].confirmed).toFixed(1))
     ]
 
     const dados = [
@@ -128,7 +132,8 @@ async function coronaVirus() {
         totalMortesItalia.reverse(),
         totalMortesChina.reverse(),
         totalMortesUS.reverse(),
-        morteMes
+        morteMes,
+        morteTaxaPaises
     ]
     return dados;
 }
@@ -244,6 +249,15 @@ async function handleResults(mortes) {
                 }]
             },
             tooltips: {
+                // exibe o valor do tooltip com porcentagem
+                // callbacks: {
+                //     title: function() {
+                //         return '';
+                //     },
+                //     label: function(tooltipItem, data) {
+                //         return tooltipItem.yLabel + " %";
+                //     }
+                // },
                 mode: 'index',
                 intersect: false,
                 caretSize: 20,
@@ -302,6 +316,13 @@ async function handleResults(mortes) {
             }]
         },
         options: {
+            plugins: {
+                labels: {
+                    render: 'value',
+                    // fontColor: ['green', 'white', 'red', 'blue'],
+                    precision: 2,
+                }
+            },
             scales: {
                 yAxes: [{
                     ticks: {
@@ -329,9 +350,168 @@ async function handleResults(mortes) {
             }
         }
     });
+
+    // doughnut:
+    const ctx3 = document.getElementById('3myChart').getContext('2d');
+    // deixa tooltip fixo só o valor sendo exibido:
+    // Chart.pluginService.register({
+    //     beforeRender: function (chart) {
+    //         if (chart.config.options.showAllTooltips) {
+    //             chart.pluginTooltips = [];
+    //             chart.config.data.datasets.forEach(function (dataset, i) {
+    //                 chart.getDatasetMeta(i).data.forEach(function (sector, j) {
+    //                     chart.pluginTooltips.push(new Chart.Tooltip({
+    //                         _chart: chart.chart,
+    //                         _chartInstance: chart,
+    //                         _data: chart.data,
+    //                         _options: chart.options.tooltips,
+    //                         _active: [sector]
+    //                     }, chart));
+    //                 });
+    //             });
+    //             chart.options.tooltips.enabled = false;
+    //         }
+    //     },
+    //     afterDraw: function (chart, easing) {
+    //         if (chart.config.options.showAllTooltips) {
+    //             if (!chart.allTooltipsOnce) {
+    //                 if (easing !== 1)
+    //                     return;
+    //                 chart.allTooltipsOnce = true;
+    //             }
+
+    //             chart.options.tooltips.enabled = true;
+    //             Chart.helpers.each(chart.pluginTooltips, function (tooltip) {
+    //                 tooltip.initialize();
+    //                 tooltip.update();
+    //                 tooltip.pivot();
+    //                 tooltip.transition(easing).draw();
+    //             });
+    //             chart.options.tooltips.enabled = false;
+    //         }
+    //     }
+    // });
+
+    new Chart(ctx3, {
+        type: 'pie', // ou doughnut 
+        data: {
+            labels: ['Brasil', 'China', 'Estados Unidos', 'Itália'],
+            datasets: [{
+                data: mortesBrasil[6],
+                backgroundColor: [
+                    'green', 'red', 'blue', 'orange'
+                ],
+                borderAlign: 'inner',
+                // borderColor: ['#000', 'green', 'red', 'blue']
+                // borderWidth: 10,
+                // hoverBackgroundColor hoverBorderColor hoverBorderWidth
+            }]
+        },
+        options: {
+            plugins: {
+                labels: [{
+                    render: function (args) {
+                        // args will be something like
+                        return args.value + '%';
+                    },
+                    fontColor: ['white', 'white', 'white', 'white'],
+                    precision: 2,
+                    fontSize: 30,
+                    fontStyle: 'bold',
+                    // draw text shadows under labels, default is false
+                    textShadow: true,
+                    // text shadow intensity, default is 6
+                    shadowBlur: 9,
+                    // text shadow X offset, default is 3
+                    shadowOffsetX: 0,
+                    // text shadow Y offset, default is 3
+                    shadowOffsetY: 0,
+                    // text shadow color, default is 'rgba(0,0,0,0.3)'
+                    shadowColor: '#000',
+                },
+                {
+                    render: 'label',
+                    position: 'outside',
+                    fontSize: 36,
+                    fontColor: '#000',
+                    fontStyle: 'bold',
+                    // draw text shadows under labels, default is false
+                    textShadow: true,
+                    // text shadow intensity, default is 6
+                    shadowBlur: 9,
+                    // text shadow X offset, default is 3
+                    shadowOffsetX: 0,
+                    // text shadow Y offset, default is 3
+                    shadowOffsetY: 0,
+                    // text shadow color, default is 'rgba(0,0,0,0.3)'
+                    shadowColor: '#fff',
+                }],
+                // identifies whether or not labels of value 0 are displayed, default is false
+                showZero: true,
+            },
+            cutoutPercentage: 40, // bola do centro do gráfico
+            rotation: 10, // ângulo de rotação do gráfico
+            showAllTooltips: true,
+            animation: {
+                animateRotate: true,
+                animateScale: true
+            },
+            tooltips: {
+                // enabled: false,
+                // intersect: true,
+                caretSize: 30,
+                bodyFontSize: 30,
+                // retorna valor e titulo dentro do tooltip e põe simbolo de %:
+                callbacks: {
+                    title: function () {
+                        return '';
+                    },
+                    label: function (tooltipItem, data) {
+                        var label = data.labels[tooltipItem.index];
+                        return label + ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + '%';
+                    }
+                },
+                /* // deixa tooltip fixo só o valor sendo exibido e é possivel passar texto concatenando com o return(ex: %):
+                callbacks: {
+                    title: function (tooltipItems, data) {
+                        return '';
+                    },
+                    label: function (tooltipItem, data) {
+                        var datasetLabel = '';
+                        var label = data.labels[tooltipItem.index];
+                        return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    }
+                } */
+            },
+            title: {
+                display: true,
+                text: 'Taxa % de mortalidade',
+                fontSize: 50,
+                fontColor: '#f00',
+            },
+            legend: {
+                display: false,
+                labels: {
+                    // This more specific font property overrides the global property
+                    fontColor: '#000',
+                    padding: 60, // espaço entre itens da legenda
+                    fontSize: 25,
+                }
+            }
+        }
+    });
 }
+handleResults(coronaVirus2());
 
-handleResults(coronaVirus());
 
+// tabela países:
+fetch("https://covid19-brazil-api.now.sh/api/report/v1/countries")
+    .then(response => response.json())
+    .then(data => {
 
+        for (let i = 0; i < 184; i++) {
+            $('[data-pais]').innerHTML += '<tr><td>' + data.data[i].country + '</td>' + '<td>' + data.data[i].confirmed + '</td>' + '<td>' + data.data[i].deaths + '</td>' + '<td>' + parseFloat((data.data[i].deaths * 100 / data.data[i].confirmed).toFixed(1)) + '%' + '</td>' + '</tr>';
+        }
+
+    });
 
