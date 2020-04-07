@@ -12,10 +12,10 @@ function coronaVirus() {
     fetch('https://covid19-brazil-api.now.sh/api/report/v1/brazil')
         .then(r => r.json())
         .then(data => {
-            date.innerHTML = 'Até a Data Atual: <b>' + hoje + '</b>';
-            confirmed.innerHTML = 'Casos Confirmados: <b>' + data.data.confirmed.toLocaleString('pt-BR') + '</b>';
-            deaths.innerHTML = 'Total de Mortos: <b>' + data.data.deaths.toLocaleString('pt-BR') + '</b>';
-            mortalidade.innerHTML = 'Taxa % de Mortalidade: <b>' + parseFloat((data.data.deaths * 100 / data.data.confirmed).toFixed(1)) + '%' + '</b>';
+            date.innerHTML = hoje;
+            confirmed.innerHTML = data.data.confirmed.toLocaleString('pt-BR');
+            deaths.innerHTML = data.data.deaths.toLocaleString('pt-BR');
+            mortalidade.innerHTML = parseFloat((data.data.deaths * 100 / data.data.confirmed).toFixed(1)) + '%';
         });
 }
 coronaVirus();
@@ -56,7 +56,7 @@ fetch("https://covid19-brazil-api.now.sh/api/report/v1")
             for (let i = 1; i < 28; i++) {
                 $$('tr')[i].getAttribute('title');
                 if ($$('tr')[i].getAttribute('title') == nomedoEstado) {
-                    $('[data-info-mapa] table').innerHTML = '<tr>' + $$('tr')[0].innerHTML + '</tr>' + '<tr>' + $$('tr')[i].innerHTML + '</tr>';
+                    $('[data-info-mapa] table thead').innerHTML = '<tr>' + $$('[data-tabela] tr')[0].innerHTML + '</tr>' + '<tr>' + $$('[data-tabela] tr')[i].innerHTML + '</tr>';
                 }
             }
         }
@@ -91,6 +91,11 @@ async function coronaVirus2() {
     data.US.forEach((item, i) => {
         totalMortesUS.unshift((data.US[i].deaths));
     });
+    
+    let totalMortesMundo = 0;
+    for (let i = 0; i < 184; i++) {
+        totalMortesMundo += Object.entries(data)[i][1][data.Brazil.length - 1].deaths;
+    }
 
     const morteMes = [
         [
@@ -120,10 +125,10 @@ async function coronaVirus2() {
     ];
 
     const morteTaxaPaises = [
-        parseFloat((data.Brazil[data.Brazil.length - 1].deaths*100/data.Brazil[data.Brazil.length - 1].confirmed).toFixed(1)),
-        parseFloat((data.China[data.China.length - 1].deaths*100/data.China[data.China.length - 1].confirmed).toFixed(1)),
-        parseFloat((data.US[data.US.length - 1].deaths*100/data.US[data.US.length - 1].confirmed).toFixed(1)),
-        parseFloat((data.Italy[data.Italy.length - 1].deaths*100/data.Italy[data.Italy.length - 1].confirmed).toFixed(1))
+        parseFloat((data.Brazil[data.Brazil.length - 1].deaths * 100 / data.Brazil[data.Brazil.length - 1].confirmed).toFixed(1)),
+        parseFloat((data.China[data.China.length - 1].deaths * 100 / data.China[data.China.length - 1].confirmed).toFixed(1)),
+        parseFloat((data.US[data.US.length - 1].deaths * 100 / data.US[data.US.length - 1].confirmed).toFixed(1)),
+        parseFloat((data.Italy[data.Italy.length - 1].deaths * 100 / data.Italy[data.Italy.length - 1].confirmed).toFixed(1))
     ]
 
     const dados = [
@@ -510,8 +515,51 @@ fetch("https://covid19-brazil-api.now.sh/api/report/v1/countries")
     .then(data => {
 
         for (let i = 0; i < 184; i++) {
-            $('[data-pais]').innerHTML += '<tr><td>' + data.data[i].country + '</td>' + '<td>' + data.data[i].confirmed + '</td>' + '<td>' + data.data[i].deaths + '</td>' + '<td>' + parseFloat((data.data[i].deaths * 100 / data.data[i].confirmed).toFixed(1)) + '%' + '</td>' + '</tr>';
+            $('[data-pais] tbody').innerHTML += '<tr><td>' + data.data[i].country + '</td>' + '<td>' + data.data[i].confirmed.toLocaleString('pt-BR') + '</td>' + '<td>' + data.data[i].deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((data.data[i].deaths * 100 / data.data[i].confirmed).toFixed(1)) + '%' + '</td>' + '</tr>';
         }
 
     });
 
+// Pesquisar tabela estado:
+$('#pesquisarEstado').addEventListener('keyup', procurarEstado);
+function procurarEstado() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = $("#pesquisarEstado");
+    filter = input.value.toUpperCase();
+    table = $("#tabelaEstado");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+// Pesquisar tabela país:
+$('#pesquisarPais').addEventListener('keyup', procurarPais);
+function procurarPais() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = $("#pesquisarPais");
+    filter = input.value.toUpperCase();
+    table = $("#tabelaPais");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}

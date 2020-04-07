@@ -8,88 +8,101 @@
     <title>Documento</title>
     <meta name="author" content="Éverton Toffanetto">
     <meta name="copyright" content="© Éverton Toffanetto">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
     <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
-
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            /* width: 100%; */
-        }
-
-        td,
-        th {
-            border: 1px solid #000;
-            text-align: center;
-            padding: 8px;
-        }
-
-        tbody:nth-child(even) {
-            background-color: #dddddd;
-        }
-
-        #svg-map path {
-            fill: #0094d9
-        }
-
-        #svg-map text {
-            fill: #fff;
-            font: 12px Arial-BoldMT, sans-serif;
-            cursor: pointer
-        }
-
-        #svg-map a {
-            text-decoration: none
-        }
-
-        #svg-map a:hover {
-            cursor: pointer;
-            text-decoration: none
-        }
-
-        #svg-map a:hover path {
-            fill: #003399 !important
-        }
-
-        #svg-map .circle {
-            fill: #66ccff
-        }
-
-        #svg-map a:hover .circle {
-            fill: #003399 !important;
-            cursor: pointer
-        }
-
-        canvas {
-            width: 50% !important;
-            height: auto !important;
-            /* margin: 50px; */
-        }
-    </style>
 </head>
 
 <body>
 
-    <div>
-        <h1>Corona Vírus no Brasil - Dados atualizados em tempo real</h1>
-        <p data-date></p>
-        <p data-confirmed></p>
-        <p data-deaths></p>
-        <p data-mortalidade></p>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Corona Vírus no Brasil - Dados atualizados em tempo real</h1>
+                    <h4>Até a Data Atual:</h4>
+                    <h5 data-date></h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-3 min-height-200">
+                    <h4>Casos no:</h4>
+                    <h5>Brasil</h5>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 min-height-200">
+                    <h4>Casos Confirmados:</h4>
+                    <h5 data-confirmed></h5>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 min-height-200">
+                    <h4>Total de Mortos:</h4>
+                    <h5 data-deaths></h5>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 min-height-200">
+                    <h4>Taxa % de Mortalidade:</h4>
+                    <h5 data-mortalidade></h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-3 min-height-200">
+                    <h4>Casos no:</h4>
+                    <h5>Mundo</h5>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 min-height-200">
+                    <h4>Casos Confirmados:</h4>
+                    <h5 data-mundo-confirmed></h5>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 min-height-200">
+                    <h4>Total de Mortos:</h4>
+                    <h5 data-mundo-deaths></h5>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 min-height-200">
+                    <h4>Taxa % de Mortalidade:</h4>
+                    <h5 data-mundo-mortalidade></h5>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <canvas id="2myChart"></canvas>
-    <canvas id="myChart"></canvas>
-    <canvas id="3myChart"></canvas>
+    <div class="container-fluid">
+        <div class="container">
+            <canvas id="2myChart"></canvas>
+        </div>
+        <div class="container">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="container">
+            <canvas id="3myChart"></canvas>
+        </div>
+    </div>
 
-    <div data-quadro>
-        <div data-info-mapa>
-            <div>
+    <div data-info-mapa class="container-fluid">
+        <div class="container">
+            <div class="table-responsive">
                 <h1>Clique em um dos estados</h1>
-                <table></table>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tbody></tbody>
+                    </thead>
+                </table>
             </div>
             <svg version="1.1" id="svg-map" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="450px" height="460px"
@@ -414,31 +427,62 @@
                 </g>
             </svg>
         </div>
+    </div>
 
-        <div>
+    <div class="container-fluid">
+        <div class="container table-responsive">
             <h2>Casos por Estado:</h2>
-            <table data-tabela>
-                <tr>
-                    <th>ESTADO</th>
-                    <th>CASOS CONFIRMADOS</th>
-                    <th>TOTAL DE MORTOS</th>
-                    <th>TAXA % DE MORTALIDADE</th>
-                </tr>
-            </table>
-        </div>
+            <div data-pesquisar-estado>
+                <div data-lupa><i class="fa fa-search"></i></div>
+                <input type="text" id="pesquisarEstado" placeholder="Buscar estado pelo nome...">
+            </div>
 
-        <div>
-            <h2>Casos por País:</h2>
-            <table data-pais>
-                <tr>
-                    <th>PAÍS</th>
-                    <th>CASOS CONFIRMADOS</th>
-                    <th>TOTAL DE MORTOS</th>
-                    <th>TAXA % DE MORTALIDADE</th>
-                </tr>
-            </table>
+            <div class="container" data-fixar>
+                <table class="table" id="tabelaEstado" data-tabela>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ESTADO</th>
+                            <th>CASOS CONFIRMADOS</th>
+                            <th>TOTAL DE MORTOS</th>
+                            <th>TAXA % DE MORTALIDADE</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
+
+
+    <div class="container-fluid">
+        <div class="container table-responsive">
+            <h2>Casos por País:</h2>
+            <div data-pesquisar-pais>
+                <div data-lupa><i class="fa fa-search"></i></div>
+                <input type="text" id="pesquisarPais" placeholder="Buscar país pelo nome...">
+            </div>
+
+
+            <div class="container" data-fixar>
+                <table class="table" id="tabelaPais" data-pais>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>PAÍS</th>
+                            <th>CASOS CONFIRMADOS</th>
+                            <th>TOTAL DE MORTOS</th>
+                            <th>TAXA % DE MORTALIDADE</th>
+                        </tr>
+                    </thead>
+                    <tbody data-pais-altura></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container-fluid">
+        <div class="container">
+            <p>Éverton Toffanetto</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
