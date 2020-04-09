@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -6,6 +8,7 @@
     list-style: none;
     text-decoration: none;
     outline: none;
+    font-family: 'Poppins', monospace, sans-serif;
 }
 
 #svg-map path {
@@ -41,7 +44,7 @@
 }
 
 #pesquisarEstado,
-#pesquisarPais {
+#pesquisarPais, #pesquisarCidade {
     width: 100%;
     font-size: 16px;
     padding: 12px 20px 12px 40px;
@@ -50,7 +53,7 @@
 }
 
 [data-pesquisar-estado],
-[data-pesquisar-pais] {
+[data-pesquisar-pais], [data-pesquisar-cidade] {
     display: flex;
 }
 
@@ -80,7 +83,7 @@ tbody:nth-child(even) {
     border-bottom: 1px solid #dee2e6;
 }
 
-#tabelaPais th, #tabelaEstado th { 
+#tabelaPais th, #tabelaEstado th, #tabelaCidade th { 
     position: sticky;
     top: 0;
 }
@@ -99,4 +102,9 @@ footer {
     background: #ddd;
     padding: 50px 0;
     margin-top: 50px;
+}
+
+#tabelaPais tbody td:nth-child(2) {
+    max-width: 190px;
+    overflow-x: hidden;
 }
