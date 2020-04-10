@@ -532,7 +532,6 @@ async function handleResults(mortes) {
         }
     });
 }
-
 handleResults(coronaVirus2());
 
 // cria tabela cidade:
