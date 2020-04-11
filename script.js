@@ -246,7 +246,7 @@ async function handleResults(mortes) {
                         // fontColor: "#red", // cor dos valores eixo y
                         beginAtZero: true,
                         stepSize: 5000,
-                        padding: 5,                        
+                        padding: 5,
                         // max: 100,
                         // min: 0
                     },
@@ -675,3 +675,22 @@ function filtroPesquisa(inputFilter, tableFilter) {
 filtroPesquisa("#pesquisarPais", "#tabelaPais tbody tr");
 filtroPesquisa("#pesquisarEstado", "#tabelaEstado tbody tr");
 filtroPesquisa("#pesquisarCidade", "#tabelaCidade tbody tr");
+
+// exibir tabelas por abas:
+$('[data-aba-cidade]').addEventListener('click', () => openCity(event, 'abaCidade'));
+$('[data-aba-estado]').addEventListener('click', () => openCity(event, 'abaEstado'));
+$('[data-aba-pais]').addEventListener('click', () => openCity(event, 'abaPais'));
+
+function openCity(evt, menuName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(menuName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
