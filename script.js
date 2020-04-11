@@ -160,9 +160,10 @@ async function coronaVirus2() {
 async function handleResults(mortes) {
     const mortesBrasil = await Promise.resolve(mortes);
 
-    Chart.defaults.global.elements.line.borderWidth = 3;
-    Chart.defaults.global.elements.point.borderWidth = 3;
-    Chart.defaults.global.elements.point.hoverBorderWidth = 10;
+    Chart.defaults.global.defaultFontFamily = "'Poppins', monospace, sans-serif";
+    // Chart.defaults.global.elements.line.borderWidth = 3;
+    // Chart.defaults.global.elements.point.borderWidth = 3;
+    // Chart.defaults.global.elements.point.hoverBorderWidth = 10;
     // Chart.defaults.global.defaultFontSize = 10;
     Chart.defaults.global.responsive = true;
     // Chart.defaults.global.tooltips.mode = 'label';
@@ -182,7 +183,7 @@ async function handleResults(mortes) {
             labels: mortesBrasil[0],
             datasets: [{
                 label: 'Brasil',
-                backgroundColor: 'transparent',
+                backgroundColor: '#006d1c',
                 borderColor: '#006d1c',
                 data: mortesBrasil[1],
                 // borderColor: "rgba(220,220,220,1)",
@@ -195,22 +196,22 @@ async function handleResults(mortes) {
                 // pointHoverBorderWidth: 2,
             }, {
                 label: 'China',
-                backgroundColor: 'transparent',
+                backgroundColor: '#f00',
                 borderColor: '#f00',
                 data: mortesBrasil[3],
             }, {
                 label: 'Estados Unidos',
-                backgroundColor: 'transparent',
+                backgroundColor: '#00f',
                 borderColor: '#00f',
                 data: mortesBrasil[4],
             }, {
                 label: 'Itália',
-                backgroundColor: 'transparent',
+                backgroundColor: 'orange',
                 borderColor: 'orange',
                 data: mortesBrasil[2],
             }, {
                 label: 'Espanha',
-                backgroundColor: 'transparent',
+                backgroundColor: 'blueviolet',
                 borderColor: 'blueviolet',
                 data: mortesBrasil[7],
             }]
@@ -218,32 +219,46 @@ async function handleResults(mortes) {
 
         // Configuration options go here
         options: {
+            maintainAspectRatio: false,
             elements: {
                 line: {
-                    tension: 0 // define se a linha é reta ou curva
+                    borderWidth: 2,
+                    fill: false,
+                    // tension: 0 // define se a linha é reta ou curva
+                },
+                point: {
+                    radius: 0,
+                    // backgroundColor: 'blue',
+                    // borderWidth
+                    // borderColor
+                    hoverBackgroundColor: '#fff',
+                    hoverBorderWidth: 3,
+                    hoverRadius: 3,
+                    hitRadius: 11 // raio extra pra detecção do hover no ponto
                 }
             },
             scales: {
                 yAxes: [{
-                    display: true,
+                    // display: false,
                     color: 'blue',
                     ticks: {
                         // fontStyle: "bold",
                         // fontColor: "#red", // cor dos valores eixo y
                         beginAtZero: true,
-                        stepSize: 3000,
-                        padding: 10,
+                        stepSize: 5000,
+                        padding: 5,                        
                         // max: 100,
                         // min: 0
                     },
                     scaleLabel: {
-                        display: true,
-                        labelString: 'Total de Mortos',
+                        // display: true,
+                        labelString: 'Total de Mortes',
                         fontColor: '#000',
                     },
                     gridLines: {
+                        drawBorder: true,
                         color: '#ccc',
-                        zeroLineColor: "#000", // cor do eixo
+                        zeroLineColor: '#000', // cor do eixo
                         // lineWidth: 22 // expessura da linha guia horizontal
                         tickMarkLength: 0, // linha guia pra fora do eixo
                         // z: 0 // z-index of gridline layer. Values <= 0 are drawn under datasets, > 0 on top.
@@ -254,18 +269,19 @@ async function handleResults(mortes) {
                     ticks: {
                         beginAtZero: true,
                         padding: 10,
-                        maxTicksLimit: 10 // limite de linhas guias exibidas
+                        // maxTicksLimit: 6 // limite de linhas guias exibidas
                         // max: 100,
                         // min: 0
                     },
                     scaleLabel: {
-                        display: true,
+                        display: false,
                         labelString: 'Dias',
                         fontColor: '#000',
                     },
                     gridLines: {
+                        drawBorder: true,
                         color: '#ccc',
-                        zeroLineColor: "red",
+                        zeroLineColor: 'red',
                         tickMarkLength: 0, // linha guia pra fora do eixo
                         // zeroLineColor: "#000",
                         // zeroLineWidth: 2
@@ -282,12 +298,26 @@ async function handleResults(mortes) {
                 //         return tooltipItem.yLabel + " %";
                 //     }
                 // },
+                // backgroundColor
+                titleFontSize: 14,
+                // titleFontColor
+                // titleAlign
+                titleMarginBottom: 10,
+                bodySpacing: 8,
+                xPadding: 10,
+                yPadding: 10,
                 mode: 'index',
                 intersect: false,
-                caretSize: 20,
+                caretSize: 5,
+                bodyFontSize: 14,
+                position: 'nearest',
+                caretPadding: 20,
+                cornerRadius: 4,
+                // borderColor
+                // borderWidth
             },
             title: {
-                display: true,
+                display: false,
                 text: 'Total de mortos por Coronavírus ao dia',
                 fontSize: 50,
                 fontColor: '#f00',
@@ -296,7 +326,9 @@ async function handleResults(mortes) {
                 labels: {
                     // This more specific font property overrides the global property
                     fontColor: '#000',
-                }
+                    boxWidth: 12,
+                },
+                position: 'bottom'
             }
         }
     });
@@ -306,13 +338,14 @@ async function handleResults(mortes) {
     new Chart(ctx2, {
         type: 'bar',
         data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril'],
+            labels: ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL'],
             datasets: [{
                 label: 'Brasil',
                 data: mortesBrasil[5][0],
                 backgroundColor: [
                     'green', 'green', 'green', 'green'
-                ]
+                ],
+                borderColor: 'green',
             },
             {
                 label: 'China',
@@ -320,6 +353,7 @@ async function handleResults(mortes) {
                 backgroundColor: [
                     'red', 'red', 'red', 'red'
                 ],
+                borderColor: 'red',
                 // borderColor: '#000',
                 // borderWidth: 6,
                 // hoverBorderColor : 'blue'
@@ -329,46 +363,99 @@ async function handleResults(mortes) {
                 data: mortesBrasil[5][2],
                 backgroundColor: [
                     'blue', 'blue', 'blue', 'blue'
-                ]
+                ],
+                borderColor: 'blue',
             },
             {
                 label: 'Itália',
                 data: mortesBrasil[5][3],
                 backgroundColor: [
                     'orange', 'orange', 'orange', 'orange'
-                ]
+                ],
+                borderColor: 'orange',
             },
             {
                 label: 'Espanha',
                 data: mortesBrasil[5][4],
                 backgroundColor: [
                     'blueviolet', 'blueviolet', 'blueviolet', 'blueviolet'
-                ]
+                ],
+                borderColor: 'blueviolet',
             }]
         },
         options: {
+            maintainAspectRatio: false,
             plugins: {
                 labels: {
                     render: 'value',
-                    // fontColor: ['green', 'white', 'red', 'blue'],
+                    // macete pra n~eo exibir valores acima das barras:
+                    fontColor: ['transparent', 'transparent', 'transparent', 'transparent'],
                     precision: 2,
-                }
+                },
             },
             scales: {
                 yAxes: [{
+                    // display: false,
+                    color: 'blue',
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        stepSize: 5000,
+                        padding: 5,
+                    },
+                    gridlines: {
+                        drawOnChartArea: true,
+                        drawBorder: true,
+                        color: '#ccc',
+                        zeroLineColor: "red",
+                        tickMarkLength: 0,
+                    },
+                    scaleLabel: {
+                        // display: true,
+                        labelString: 'Total de Mortes',
+                        fontColor: '#000',
+                    },
+                }],
+                xAxes: [{
+                    // display: false,
+                    ticks: {
+                        beginAtZero: true,
+                        padding: 10,
+                        maxTicksLimit: 6 // limite de linhas guias exibidas
+                        // max: 100,
+                        // min: 0
+                    },
+                    scaleLabel: {
+                        display: false,
+                        labelString: 'Mês',
+                        fontColor: '#000',
+                    },
+                    gridLines: {
+                        // zeroLineWidth: 3,
+                        drawBorder: true,
+                        drawOnChartArea: true,
+                        color: '#ccc',
+                        zeroLineColor: "red",
+                        tickMarkLength: 0, // linha guia pra fora do eixo
+                        // zeroLineColor: "#000",
+                        // zeroLineWidth: 2
                     }
                 }]
             },
-            responsive: true,
             tooltips: {
                 mode: 'index',
+                bodySpacing: 8,
                 intersect: false,
-                caretSize: 20,
+                titleMarginBottom: 10,
+                caretSize: 5,
+                bodyFontSize: 14,
+                titleFontSize: 14,
+                xPadding: 10,
+                yPadding: 10,
+                caretPadding: 20,
+                cornerRadius: 4,
             },
             title: {
-                display: true,
+                display: false,
                 text: 'Total de mortos por Coronavírus ao Mês',
                 fontSize: 50,
                 fontColor: '#f00',
@@ -377,7 +464,9 @@ async function handleResults(mortes) {
                 labels: {
                     // This more specific font property overrides the global property
                     fontColor: '#000',
-                }
+                    boxWidth: 12,
+                },
+                position: 'bottom'
             }
         }
     });
@@ -432,13 +521,19 @@ async function handleResults(mortes) {
                 backgroundColor: [
                     'green', 'red', 'blue', 'orange', 'blueviolet'
                 ],
+                borderColor: [
+                    'green', 'red', 'blue', 'orange', 'blueviolet'
+                ],
                 borderAlign: 'inner',
                 // borderColor: ['#000', 'green', 'red', 'blue']
                 // borderWidth: 10,
-                // hoverBackgroundColor hoverBorderColor hoverBorderWidth
+                // hoverBackgroundColor: 'red'
+                hoverBorderColor: '#fff',
+                hoverBorderWidth: 4,
             }]
         },
         options: {
+            maintainAspectRatio: false,
             plugins: {
                 labels: [{
                     render: function (args) {
@@ -447,7 +542,7 @@ async function handleResults(mortes) {
                     },
                     fontColor: ['white', 'white', 'white', 'white', 'white'],
                     precision: 2,
-                    fontSize: 30,
+                    fontSize: 16,
                     fontStyle: 'bold',
                     // draw text shadows under labels, default is false
                     textShadow: true,
@@ -459,11 +554,11 @@ async function handleResults(mortes) {
                     shadowOffsetY: 0,
                     // text shadow color, default is 'rgba(0,0,0,0.3)'
                     shadowColor: '#000',
-                },
+                }/* ,
                 {
                     render: 'label',
                     position: 'outside',
-                    fontSize: 36,
+                    fontSize: 16,
                     fontColor: '#000',
                     fontStyle: 'bold',
                     // draw text shadows under labels, default is false
@@ -476,7 +571,7 @@ async function handleResults(mortes) {
                     shadowOffsetY: 0,
                     // text shadow color, default is 'rgba(0,0,0,0.3)'
                     shadowColor: '#fff',
-                }],
+                } */],
                 // identifies whether or not labels of value 0 are displayed, default is false
                 showZero: true,
             },
@@ -490,8 +585,14 @@ async function handleResults(mortes) {
             tooltips: {
                 // enabled: false,
                 // intersect: true,
-                caretSize: 30,
-                bodyFontSize: 30,
+                // titleMarginBottom: 10,
+                caretPadding: 20,
+                cornerRadius: 4,
+                xPadding: 10,
+                yPadding: 10,
+                caretSize: 5,
+                bodyFontSize: 14,
+                titleFontSize: 14,
                 // retorna valor e titulo dentro do tooltip e põe simbolo de %:
                 callbacks: {
                     title: function () {
@@ -515,19 +616,22 @@ async function handleResults(mortes) {
                 } */
             },
             title: {
-                display: true,
+                display: false,
                 text: 'Taxa % de mortalidade',
                 fontSize: 50,
                 fontColor: '#f00',
             },
             legend: {
-                display: false,
+                display: true,
                 labels: {
                     // This more specific font property overrides the global property
                     fontColor: '#000',
-                    padding: 60, // espaço entre itens da legenda
-                    fontSize: 25,
-                }
+                    padding: 10, // espaço entre itens da legenda
+                    fontSize: 12,
+                    boxWidth: 12,
+                    usePointStyle: true
+                },
+                position: 'bottom'
             }
         }
     });
