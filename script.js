@@ -49,8 +49,8 @@ fetch("https://covid19-brazil-api.now.sh/api/report/v1")
         // click no estado do mapa exibe dados do estado :
         $$('a').forEach(item => item.addEventListener('click', estadosBrasileiros));
 
-        function estadosBrasileiros(e) {
-            e.preventDefault();
+        function estadosBrasileiros() {
+            // e.preventDefault();
             const nomedoEstado = this.getAttribute("title");
             $('[data-info-mapa] h1').innerHTML = nomedoEstado;
 
@@ -693,4 +693,14 @@ function openCity(evt, menuName) {
     }
     document.getElementById(menuName).style.display = "block";
     evt.currentTarget.className += " active";
+}
+
+// barra de navegação:
+$(".toggle-sidebar").addEventListener('click', clickFunction);
+
+function clickFunction() {
+
+    $("#sidebar").classList.toggle("collapsed");
+    $("#content").classList.toggle("col-md-12");
+
 }
