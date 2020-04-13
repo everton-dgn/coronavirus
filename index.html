@@ -30,31 +30,40 @@
 <body>
 
     <nav>
-        <button class="toggle-sidebar">☰</button>
+        <button class="toggle-sidebar">☰</button> <span class="toggle-sidebar">Menu</span>
     </nav>
 
     <div class="container-fluid">
         <div class="row" style="flex-wrap: nowrap!important;">
 
             <!-- sidebar -->
-            <div class="col-md-3" id="sidebar">
+            <div class="col-md-3 collapsed" id="sidebar">
                 <ul>
-                    <a href="">
-                        <li>DADOS POR LOCALIDADE</li>
+                    <a href="index.html">
+                        <li><i class="fa fa-home"></i> INÍCIO</li>
                     </a>
-                    <a href="">
-                        <li>GRÁFICOS</li>
+                    <a href="#informacoes">
+                        <li><i class="fa fa-warning"></i> INFORMAÇÕES</li>
                     </a>
-                    <a href="">
-                        <li>INFORMAÇÕES</li>
+                    <a href="#dadosLocalidade">
+                        <li><i class="fa fa-map-marker"></i> DADOS POR LOCALIDADE</li>
                     </a>
-                    <a href="">
-                        <li>LINKS ÚTEIS</li>
+                    <a href="#mapa">
+                        <li><i class="fa fa-map"></i> MAPA</li>
+                    </a>
+                    <a href="#graficos">
+                        <li><i class="fa fa-bar-chart"></i> GRÁFICOS</li>
+                    </a>
+                    <a href="#linksUteis">
+                        <li><i class="fa fa-link"></i> LINKS ÚTEIS</li>
+                    </a>
+                    <a href="https://querocriarsite.com" target="_blank">
+                        <li><i class="fa fa-info-circle"></i> SOBRE O AUTOR</li>
                     </a>
                 </ul>
             </div>
 
-            <div class="col-md-9" id="content" style="flex: 100%!important; padding: 0;">
+            <div class="col-md-9 col-md-12" id="content" style="flex: 100%!important; padding: 0;">
 
                 <!-- banner -->
                 <div class="container-fluid mb-4" data-paralax>
@@ -77,8 +86,8 @@
 
                 <!-- paineis topo -->
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 p-3">
+                    <div class="row mb-4">
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-3" data-left>
                             <div class="bg-white shadow-box rounded px-3 py-4 border-blue d-flex"
                                 style="justify-content: space-between;" data-efeito-hover>
                                 <div data-left-icones class="ml-50">
@@ -92,13 +101,13 @@
                                     </div>
                                 </div>
                                 <h1 data-right-icones class="mr-50">
-                                    <img src="images/icon/casos-no-mundo.png" alt="Casos no mundo" width="50px"
+                                    <img src="images/painel/casos-no-mundo.png" alt="Casos no mundo" width="50px"
                                         height="50px">
                                 </h1>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 p-3">
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-3" data-bottom>
                             <div class="bg-white shadow-box rounded px-3 py-4 border-green d-flex"
                                 style="justify-content: space-between;" data-efeito-hover>
                                 <div data-left-icones class="ml-50">
@@ -111,13 +120,13 @@
                                     </div>
                                 </div>
                                 <h1 data-right-icones class="mr-50">
-                                    <img src="images/icon/casos-confirmados.png" alt="Casos confirmados" width="50px"
+                                    <img src="images/painel/casos-confirmados.png" alt="Casos confirmados" width="50px"
                                         height="50px">
                                 </h1>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 p-3">
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-3" data-top>
                             <div class="bg-white shadow-box rounded px-3 py-4 border-pink d-flex"
                                 style="justify-content: space-between;" data-efeito-hover>
                                 <div data-left-icones class="ml-50">
@@ -130,12 +139,12 @@
                                     </div>
                                 </div>
                                 <h1 data-right-icones class="mr-50">
-                                    <img src="images/icon/casos-hoje.png" alt="Casos hoje" width="50px" height="50px">
+                                    <img src="images/painel/casos-hoje.png" alt="Casos hoje" width="50px" height="50px">
                                 </h1>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 p-3">
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-3" data-left>
                             <div class="bg-white shadow-box rounded px-3 py-4 border-red d-flex"
                                 style="justify-content: space-between;" data-efeito-hover>
                                 <div data-left-icones class="ml-50">
@@ -148,12 +157,13 @@
                                     </div>
                                 </div>
                                 <h1 data-right-icones class="mr-50">
-                                    <img src="images/icon/mortes-hoje.png" alt="Mortes hoje" width="50px" height="50px">
+                                    <img src="images/painel/mortes-hoje.png" alt="Mortes hoje" width="50px"
+                                        height="50px">
                                 </h1>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 p-3">
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-3" data-bottom>
                             <div class="bg-white shadow-box rounded px-3 py-4 border-violet d-flex"
                                 style="justify-content: space-between;" data-efeito-hover>
                                 <div data-left-icones class="ml-50">
@@ -166,13 +176,13 @@
                                     </div>
                                 </div>
                                 <h1 data-right-icones class="mr-50">
-                                    <img src="images/icon/total-de-mortos.png" alt="Total de mortos" width="50px"
+                                    <img src="images/painel/total-de-mortos.png" alt="Total de mortos" width="50px"
                                         height="50px">
                                 </h1>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 p-3">
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-3" data-left>
                             <div class="bg-white shadow-box rounded px-3 py-4 border-orange d-flex"
                                 style="justify-content: space-between;" data-efeito-hover>
                                 <div data-left-icones class="ml-50">
@@ -185,7 +195,7 @@
                                     </div>
                                 </div>
                                 <h1 data-right-icones class="mr-50">
-                                    <img src="images/icon/taxa-de-mortalidade.png" alt="Taxa de mortalidade"
+                                    <img src="images/painel/taxa-de-mortalidade.png" alt="Taxa de mortalidade"
                                         width="50px" height="50px">
                                 </h1>
                             </div>
@@ -194,27 +204,27 @@
                 </div>
 
                 <!-- informações -->
-                <div class="container">
-                    <div class="shadow-box rounded bg-white px-4 pb-5 border-green" data-efeito-hover
+                <div class="container" id="informacoes" data-left>
+                    <div class="shadow-box rounded bg-white px-4 pb-5 mb-5 border-green" data-efeito-hover
                         data-informacoes-covid>
                         <h1 class="green py-5">O QUE É CORONAVÍRUS (COVID-19)?</h1>
                         <div>
-                            <p class="lead">
-                                <img src="images/icon/New folder/20.png" class="float-right">
+                            <p class="lead" data-left>
+                                <img src="images/corona/1.png" class="float-right">
                                 Coronavírus é uma família de vírus que causam infecções respiratórias. O novo agente do
                                 coronavírus foi descoberto em 31/12/19 após casos registrados na China. Provoca a doença
                                 chamada de coronavírus (COVID-19).
                             </p>
-                            <p class="lead">
-                                <img src="images/icon/New folder/21.png" class="float-left">
+                            <p class="lead" data-left>
+                                <img src="images/corona/2.png" class="float-left">
                                 Os primeiros coronavírus humanos foram isolados pela primeira vez em 1937. No entanto,
                                 foi
                                 em 1965 que o vírus foi descrito como coronavírus, em decorrência do perfil na
                                 microscopia,
                                 parecendo uma coroa.
                             </p>
-                            <p class="lead">
-                                <img src="images/icon/New folder/2.png" class="float-right">
+                            <p class="lead" data-left="">
+                                <img src="images/corona/3.png" class="float-right">
                                 A maioria das pessoas se infecta com os coronavírus comuns ao longo da vida, sendo as
                                 crianças pequenas mais propensas a se infectarem com o tipo mais comum do vírus. Os
                                 coronavírus mais comuns que infectam humanos são o alpha coronavírus 229E e NL63 e beta
@@ -224,8 +234,174 @@
                     </div>
                 </div>
 
+                <!-- informações -->
+                <div class="container" data-bottom>
+                    <div class="shadow-box rounded bg-white px-4 pb-5 mb-5 border-blue" data-efeito-hover
+                        data-informacoes-covid>
+                        <h1 class="blue py-5">SINTOMAS DO COVID-19</h1>
+                        <div>
+                            <p class="lead" data-left>
+                                Os sinais e sintomas do coronavírus são principalmente respiratórios, semelhantes a um
+                                resfriado. Podem, também, causar infecção do trato respiratório inferior, como as
+                                pneumonias. No entanto, o novo coronavírus (SARS-CoV-2) ainda precisa de mais estudos e
+                                investigações para caracterizar melhor os sinais e sintomas da doença.
+                            </p>
+                            <p class="lead" data-left>
+                                <b>Os principais sintomas conhecidos até o momento são:</b>
+                            </p>
+                            <div data-sintomas>
+                                <div data-left>
+                                    <img src="images/sintomas/1.png" width="150px" height="150px">
+                                    <p><b>Febre</b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/sintomas/2.png" width="150px" height="150px">
+                                    <p><b>Tosse</b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/sintomas/3.png" width="150px" height="150px">
+                                    <p><b>Dificuldade respiratória</b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/sintomas/4.png" width="150px" height="150px">
+                                    <p><b>Garganta inflamada</b></p>
+                                </div>
+                            </div>
+                            <p class="lead" data-left>
+                                <b>Se você apresentar febre a partir de 37,8°C e dificuldade para respirar, procure
+                                    atendimento médico imediatamente.
+                                </b>
+                            </p>
+                            <p class="lead" data-left>
+                                <b>
+                                    Se entrou em contato com pacientes confirmados ou retornou de viagem nos últimos
+                                    dias, permaneça em casa em observação por, no mínimo, 7 dias. Havendo sintomas que
+                                    persistem (tosse, febre a partir de 37.8°C, coriza), procure atendimento médico.
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- informações -->
+                <div class="container" data-top>
+                    <div class="shadow-box rounded bg-white px-4 pb-5 mb-5 border-lilas" data-efeito-hover
+                        data-informacoes-covid>
+                        <h1 class="lilas py-5">PREVENÇÃO</h1>
+                        <div>
+                            <p class="lead" data-left>
+                                <b>Devem ser adotados cuidados básicos para reduzir o risco geral de contrair ou
+                                    transmitir infecções respiratórias agudas. Algumas medidas são:</b>
+                            </p>
+                            <div data-sintomas>
+                                <div data-left>
+                                    <img src="images/prevencao/1.png" width="150px" height="150px">
+                                    <p><b>Lavar as mãos com<br>
+                                            água e sabão</b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/prevencao/2.png" width="150px" height="150px">
+                                    <p><b>Usar álcool em gel<br>
+                                            nas mãos
+                                        </b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/prevencao/3.png" width="150px" height="150px">
+                                    <p><b>Cobrir nariz e boca ao<br>
+                                            espirrar e tossir</b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/prevencao/4.png" width="150px" height="150px">
+                                    <p><b>Evitar qualquer<br>
+                                            aglomeração</b></p>
+                                </div>
+                            </div>
+                            <div data-sintomas>
+                                <div data-left>
+                                    <img src="images/prevencao/5.png" width="150px" height="150px">
+                                    <p><b>Manter ambientes<br>
+                                            bem ventilados</b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/prevencao/6.png" width="150px" height="150px">
+                                    <p><b>Não compartilhar<br>
+                                            objetos pessoais</b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/prevencao/7.png" width="150px" height="150px">
+                                    <p><b>Usar máscara caso<br>
+                                            apresente sintomas</b></p>
+                                </div>
+                                <div data-left>
+                                    <img src="images/prevencao/8.png" width="150px" height="150px">
+                                    <p><b>Distanciar-se de pessoas<br>
+                                            espirrando ou tossindo</b></p>
+                                </div>
+                            </div>
+                            <p class="lead" data-left>
+                                <b>
+                                    Profissionais de saúde devem utilizar medidas de precaução padrão, de contato e de
+                                    gotículas (máscara cirúrgica, luvas, avental não estéril e óculos de proteção).
+                                </b>
+                            </p>
+                            <p class="lead" data-left>
+                                <b>
+                                    Para a realização de procedimentos que gerem aerossolização de secreções
+                                    respiratórias como intubação, aspiração de vias aéreas ou indução de escarro, deverá
+                                    ser utilizada precaução por aerossóis, com uso de máscara N95.
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- informações -->
+                <div class="container" data-left>
+                    <div class="shadow-box rounded bg-white px-4 pb-5 mb-5 border-greydark" data-efeito-hover
+                        data-informacoes-covid>
+                        <h1 class="greydark py-5">TRATAMENTO</h1>
+                        <div data-sintomas>
+                            <div data-left>
+                                <img src="images/tratamento/1.png" width="150px" height="150px">
+                            </div>
+                            <div data-left>
+                                <img src="images/tratamento/2.png" width="150px" height="150px">
+                            </div>
+                            <div data-left>
+                                <img src="images/tratamento/3.png" width="150px" height="150px">
+                            </div>
+                        </div>
+                        <div>
+                            <p class="lead" data-left>
+                                Não existe tratamento específico para infecções causadas por coronavírus humano. É
+                                indicado repouso e consumo de bastante água, além de algumas medidas adotadas para
+                                aliviar os sintomas, conforme cada caso, como, por exemplo:
+                            </p>
+                            <p class="lead" data-left>
+                                - Uso de medicamento para dor e febre (antitérmicos e analgésicos);
+                            </p>
+                            <p class="lead" data-left>
+                                - Uso de umidificador no quarto ou tomar banho quente para auxiliar no alívio da dor de
+                                garanta e tosse.
+                            </p>
+                            <p class="lead" data-left>
+                                Assim que os primeiros sintomas surgirem, é fundamental procurar ajuda médica imediata
+                                para confirmar diagnóstico e iniciar o tratamento.
+                            </p>
+                            <p class="lead" data-left>
+                                Todos os pacientes que receberem alta durante os primeiros 7 dias do início do quadro
+                                (qualquer sintoma independente de febre), devem ser alertados para a possibilidade de
+                                piora tardia do quadro clínico e sinais de alerta de complicações, como: aparecimento de
+                                febre (podendo haver casos iniciais sem febre), elevação ou reaparecimento de febre ou
+                                sinais respiratórios, taquicardia (aumento dos batimentos cardíacos), dor pleurítica
+                                (dor no peito), fadiga (cansaço) e dispneia (falta de ar).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- gráficos -->
-                <div class="container">
+                <div class="container" id="graficos" data-bottom>
                     <div class="shadow-box rounded bg-white px-3 pb-5 border-violet" data-efeito-hover
                         data-ajuste-h-graph>
                         <div class="pt-5 pb-5" data-heigt-graph>
@@ -236,7 +412,7 @@
                 </div><br>
 
                 <!-- gráficos -->
-                <div class="container">
+                <div class="container" data-top>
                     <div class="shadow-box rounded bg-white px-3 pb-5 border-red" data-efeito-hover data-ajuste-h-graph>
                         <div class="pt-5 pb-5" data-heigt-graph>
                             <h1 class="mb-3 red">TOTAL DE MORTOS POR COVID-19 AO DIA</h1>
@@ -246,7 +422,7 @@
                 </div><br>
 
                 <!-- gráficos -->
-                <div class="container">
+                <div class="container" data-left>
                     <div class="shadow-box rounded bg-white px-3 pb-5 border-pink" data-efeito-hover
                         data-ajuste-h-graph>
                         <div class="pt-5 pb-5" data-heigt-graph>
@@ -257,11 +433,11 @@
                 </div>
 
                 <!-- mapa -->
-                <div class="container">
+                <div class="container" id="mapa" data-bottom>
                     <div data-info-mapa class="rounded container shadow-box py-5 my-5 px-5 border-violet"
                         data-efeito-hover>
                         <h1 data-titulo-secao>CLIQUE EM UM DOS ESTADOS</h1><br>
-                        <div class="table-responsive rounded">
+                        <div class="table-responsive rounded" data-left>
                             <table class="table">
                                 <thead class="thead-dark">
                                     <tr>
@@ -279,7 +455,7 @@
                                 </thead>
                             </table>
                         </div>
-                        <div data-mapa-width>
+                        <div data-mapa-width data-left>
                             <svg version="1.1" id="svg-map" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 450 460"
                                 enable-background="new 0 0 450 460" xml:space="preserve">
@@ -641,7 +817,7 @@
                 </div>
 
                 <!-- NAVEGAÇÃO ABAS START -->
-                <div class="container">
+                <div class="container" id="dadosLocalidade" data-top>
                     <div data-efeito-hover>
                         <div class="bg-white shadow-box rounded border-bluedark">
                             <h1 class="text-center pt-5 pb-4 bluedark">CASOS POR LOCALIDADE</h1>
@@ -662,6 +838,7 @@
                                     </form>
 
                                     <div class="container rounded" data-fixar>
+                                        
                                         <table class="table" id="tabelaCidade" data-cidade-altura>
                                             <thead class="thead-dark">
                                                 <tr>
@@ -733,46 +910,46 @@
                 </div>
 
                 <!-- links úteis -->
-                <div class="container">
+                <div class="container" id="linksUteis" data-left>
                     <div class="bg-white border-orange py-4 my-5 shadow-box rounded" data-efeito-hover>
                         <h1 class="p-3 orange">LINKS ÚTEIS</h1>
-                        <div class="container text-center mt-3 mb-4" data-link-uteis>
-                            <li>
+                        <div class="text-center mt-3 mb-4" data-link-uteis>
+                            <li data-left>
                                 <b><i class="fa fa-hand-o-right" aria-hidden="true"></i> Bing (Microsoft): </b><a
                                     href="https://bing.com/covid" target="_blank"><i class="fa fa-external-link"
                                         aria-hidden="true"></i> www.bing.com</a>
                             </li>
-                            <li>
+                            <li data-left>
                                 <b><i class="fa fa-hand-o-right" aria-hidden="true"></i> Worldometer: </b><a
                                     href="https://www.worldometers.info/coronavirus/" target="_blank"><i
                                         class="fa fa-external-link" aria-hidden="true"></i>
                                     www.worldometers.info</a>
                             </li>
-                            <li>
+                            <li data-left>
                                 <b><i class="fa fa-hand-o-right" aria-hidden="true"></i> Ministério da Saúde: </b><a
                                     href="https://saude.gov.br/" target="_blank"><i class="fa fa-external-link"
                                         aria-hidden="true"></i> www.saude.gov.br</a>
                             </li>
-                            <li>
+                            <li data-left>
                                 <b><i class="fa fa-hand-o-right" aria-hidden="true"></i> Organização Mundial da
                                     Saúde:
                                 </b><a href="https://www.who.int/" target="_blank"><i class="fa fa-external-link"
                                         aria-hidden="true"></i> www.who.int</a>
                             </li>
-                            <li>
+                            <li data-left>
                                 <b><i class="fa fa-hand-o-right" aria-hidden="true"></i> Secretaria de Saúde da
                                     Bahia:
                                 </b><a href="http://www.saude.ba.gov.br/temasdesaude/coronavirus" target="_blank"><i
                                         class="fa fa-external-link" aria-hidden="true"></i> www.saude.ba.gov.br</a>
                             </li>
-                            <li>
+                            <li data-left>
                                 <b><i class="fa fa-hand-o-right" aria-hidden="true"></i> Portal de Notícias G1 da
                                     Globo:
                                 </b><a href="https://especiais.g1.globo.com/bemestar/coronavirus/mapa-coronavirus/#/"
                                     target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>
                                     www.especiais.g1.globo.com</a>
                             </li>
-                            <li>
+                            <li data-left>
                                 <b><i class="fa fa-hand-o-right" aria-hidden="true"></i> Teste Online de COVID-19:
                                 </b><a
                                     href="http://covid-19-ao.herokuapp.com/?fbclid=IwAR2dVQ2g1V283vtbah-cqalMqsXZZqLoHhBXHI0u3FvZZPDTM5H8sZm5IZw"
@@ -812,6 +989,8 @@
 
             </div>
         </div>
+
+        <div data-topo><img src="images/topo.png" alt="Voltar ao topo"></div>
 
         <script src="script.js"></script>
 </body>

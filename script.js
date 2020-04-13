@@ -643,6 +643,7 @@ fetch("https://api.coronaanalytic.com/journal")
     .then(response => response.json())
     .then(({ values }) => {
         let cidades = values.map((el) => el.citys).flat();
+        
         cidades.forEach(item => {
             $('[data-cidade-altura]').innerHTML += '<tr><td>' + item.city + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td></tr>'
         });
@@ -680,7 +681,6 @@ filtroPesquisa("#pesquisarCidade", "#tabelaCidade tbody tr");
 $('[data-aba-cidade]').addEventListener('click', () => openCity(event, 'abaCidade'));
 $('[data-aba-estado]').addEventListener('click', () => openCity(event, 'abaEstado'));
 $('[data-aba-pais]').addEventListener('click', () => openCity(event, 'abaPais'));
-
 function openCity(evt, menuName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -696,11 +696,82 @@ function openCity(evt, menuName) {
 }
 
 // barra de navegação:
-$(".toggle-sidebar").addEventListener('click', clickFunction);
-
+$("button.toggle-sidebar").addEventListener('click', clickFunction);
+$("span.toggle-sidebar").addEventListener('click', clickFunction);
 function clickFunction() {
 
     $("#sidebar").classList.toggle("collapsed");
     $("#content").classList.toggle("col-md-12");
+
+}
+
+// voltar ao topo:
+window.onscroll = function () {
+    if (window.scrollY > 400) {
+        document.querySelector('[data-topo]').classList.add('mostrar');
+    } else {
+        document.querySelector('[data-topo]').classList.remove('mostrar');
+    }
+};
+document.querySelector('[data-topo] img').addEventListener('click', topo);
+function topo() {
+    window.scroll({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// lazyload
+const container = $$('[data-left], [data-bottom], [data-top]');
+const windowMetade = window.innerHeight * 0.6;
+function animaScroll() {
+    container.forEach((item) => {
+        const sectionTop = item.getBoundingClientRect().top;
+        const sectionVisivel = (sectionTop - windowMetade) < 0;
+
+        if (sectionVisivel)
+            item.classList.add('animar');
+        else if (item.classList.contains('animar'))
+            item.classList.remove('animar');
+    });
+}
+animaScroll();
+window.addEventListener('scroll', animaScroll);
+
+// rolagem suave links internos:
+const menuLinksInternos = $$('a[href^="#"]');
+if (menuLinksInternos.length) {
+
+    menuLinksInternos.forEach((item) => {
+        item.addEventListener('click', menuTop);
+    });
+
+    function menuTop(e) {
+        e.preventDefault();
+
+        const id = this.getAttribute('href');
+        const alturaMenu = $('nav').scrollHeight;
+        const topo = $('nav').offsetTop;
+        const distanciaTopo = document.querySelector(id).offsetTop - alturaMenu - topo;
+
+        scrollSuave($('html').scrollTop, distanciaTopo, 0);
+    }
+
+    function scrollSuave(old, des, atu) { // Função que faz o scroll suave
+        const easing = function (t) {
+            return (--t) * t * t + 1
+        };
+        atu += .5; // move de 2 em 2 pixel. Aumentando o valor, irá aumentar a velocidade
+        let ease = easing(atu / 100);
+        let del = des - old;
+        del *= ease;
+        del += old;
+        document.querySelector('html').scrollTo(0, del);
+        if (atu < 100) {
+            window.requestAnimationFrame(function () {
+                scrollSuave(old, des, atu);
+            });
+        }
+    }
 
 }

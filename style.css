@@ -21,6 +21,14 @@ nav {
     background: #fff;
     box-shadow: 0 3px 16px #050a25bf !important;
     z-index: 9999;
+    display: flex!important;
+    align-items: center!important;
+}
+
+nav span {
+    color: #212529;
+    font-size: 1.5rem;
+    margin-left: 8px!important;
 }
 
 nav button {
@@ -58,10 +66,21 @@ nav button:hover {
 
 #sidebar ul li {
     border-bottom: 1px solid #ffffff42;
-    padding: 20px 10px;
+    padding: 12px 10px;
     color: #fff;
     letter-spacing: 1px;
     text-shadow: 1px 1px 6px #000;
+    display: flex;
+    align-items: baseline;
+    transition: all .3s linear;
+}
+
+#sidebar ul li:hover {
+    padding-left: 15px;
+}
+
+#sidebar .fa {
+    width: 28px;
 }
 
 .col-md-9 .width-12,
@@ -74,7 +93,6 @@ nav button:hover {
     background: url('images/background/8.jpg') no-repeat center;
     background-size: cover;
     margin-top: 0;
-    transition: all 0.3s ease !important;
     height: 100vh !important;
     min-height: 100vh !important;
     top: 0;
@@ -82,11 +100,15 @@ nav button:hover {
     position: sticky;
     box-shadow: inset -15px -14px 22px 0px #00000094, 3px 0 16px #050a25bf;
     z-index: 999 !important;
+    transition: all 0.3s ease !important;
 }
 
 .collapsed {
-    display: none;
-    /* hide it for small displays */
+    max-width: 0!important;
+    opacity: 0!important;
+    padding: 0!important;
+    transform: translateX(-200%)!important;
+    transition: all .3s ease!important;
 }
 
 #sidebar button {
@@ -176,7 +198,7 @@ tbody:nth-child(odd) {
     margin-bottom: 60px;
     background: url('images/background/3.jpg') no-repeat center center;
     background-size: cover;
-    box-shadow: inset 0px -14px 22px 0px #20243ab5, inset 0px 14px 22px 0px #20243ab5;
+    /* box-shadow: inset 0px -14px 22px 0px #20243ab5, inset 0px 14px 22px 0px #20243ab5; */
     background-attachment: fixed;
     text-align: center;
 }
@@ -215,10 +237,17 @@ th {
 }
 
 footer {
-    background: url('images/background/5.jpg') no-repeat top;
-    background-size: cover;
+    background: url('images/background/5.jpg') no-repeat top !important;
+    background-size: cover !important;
     padding: 50px 0;
     height: 300px;
+    transition: background 40s linear !important;
+}
+
+footer:hover {
+    background: url('images/background/5.jpg') no-repeat bottom !important;
+    background-size: cover !important;
+    transition: background 40s linear !important;
 }
 
 footer .fa {
@@ -258,13 +287,13 @@ footer p img:hover {
 }
 
 [data-informacoes-covid] p img.float-left {
-    margin-right: 10px!important;
+    margin-right: 10px !important;
 }
 
 [data-informacoes-covid] p img {
     width: 64px;
-    height: 64px; 
-    margin-left: 10px;   
+    height: 64px;
+    margin-left: 10px;
 }
 
 [data-link-uteis] {
@@ -301,7 +330,7 @@ td {
 }
 
 .shadow-box {
-    box-shadow: 0 1px 15px 1px rgba(62, 57, 107, .07) !important;
+    box-shadow: 0 1px 15px 1px #3e396b12 !important;
 }
 
 .fa-globe {
@@ -314,6 +343,10 @@ td {
 
 .red {
     color: #dc3545;
+}
+
+.lilas {
+    color: #b876e2;
 }
 
 .orange {
@@ -334,6 +367,14 @@ td {
 
 .bluedark {
     color: #08315a;
+}
+
+.greydark {
+    color: #374079;
+}
+
+.border-greydark {
+    border-left: 4px solid #374079;
 }
 
 .border-bluedark {
@@ -362,6 +403,10 @@ td {
 
 .border-pink {
     border-left: 4px solid #d346b1;
+}
+
+.border-lilas {
+    border-left: 4px solid #b876e2;
 }
 
 .h1,
@@ -429,14 +474,21 @@ h6 {
 }
 
 [data-paralax] {
-    background: url('images/background/1.jpg') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    box-shadow: inset 0px -14px 22px 0px #20243ad4;
-    margin-top: 36px;
+    background: url('images/background/1.jpg') no-repeat top !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    height: 400px !important;
+    display: flex !important;
+    align-items: center !important;
+    box-shadow: inset 0px -14px 22px 0px #20243ad4 !important;
+    margin-top: 36px !important;
+    transition: background 10s linear !important;
+}
+
+[data-paralax]:hover {
+    background: url('images/background/1.jpg') no-repeat bottom !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
 }
 
 [data-subtitulo-banner] {
@@ -520,7 +572,73 @@ button {
     text-align: right;
 }
 
+[data-sintomas] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+[data-sintomas] div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+/* botão topo */
+.mostrar {
+    display: block !important;
+    animation: topo 1s forwards;
+}
+
+[data-topo] {
+    display: none;
+}
+
+[data-topo] img {
+    width: 45px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    filter: grayscale(3) invert(1) brightness(1)
+}
+
+@keyframes topo {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+[data-left] {
+    opacity: 0;
+    transition: all .4s linear;
+    transform: translate3d(-30px, 0, 0);
+}
+
+[data-top] {
+    opacity: 0;
+    transition: all .4s linear;
+    transform: translate3d(0, -30px, 0);
+}
+
+[data-bottom] {
+    opacity: 0;
+    transition: all .4s linear;
+    transform: translate3d(0, 30px, 0);
+}
+
+.animar {
+    opacity: 1!important;
+    transform: translate3d(0, 0, 0)!important;
+}
+
 @media screen and (max-width: 800px) {
+
     [data-titulo-banner] {
         font-size: 1.8rem !important;
     }
@@ -559,7 +677,7 @@ button {
 
     #sidebar {
         position: fixed !important;
-        top: 10px !important;
+        top: 12px !important;
         left: 0 !important;
         z-index: 999 !important;
         height: 100vh !important;
@@ -569,10 +687,18 @@ button {
     [data-mapa-width] {
         width: 100%;
     }
+
+    #sidebar .fa {
+        width: 20px;
+    }
 }
 
 @media screen and (max-width: 992px) {
     [data-subtitulo-banner]:nth-child(2) {
         text-align: left;
+    }
+
+    #sidebar ul li {
+        font-size: .7rem;
     }
 }
