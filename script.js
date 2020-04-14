@@ -805,26 +805,23 @@ async function pegaCidades() {
         return Array(sigla.citys.length).fill(sigla.state);
     }
 
+    // pesquisar cidade:
+    $("#pesquisarCidade").addEventListener("keyup", () => {
+        var valor = $("#pesquisarCidade").value.toLowerCase();
+
+        cidades.filter((item) => {
+            if (item.city.toLowerCase().indexOf(valor) > -1)
+                item.city.style.display = '';
+            else
+                item.city.style.display = 'none';
+        });
+    });
+
     imprimirTabela();
 
     // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
     tabela.style.display = "table";
     spinner.style.display = "none";
-
-    // pesquisar cidade:
-    function filtroPesquisaCidade() {
-        $("#pesquisarCidade").addEventListener("keyup", () => {
-            var valor = $("#pesquisarCidade").value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-
-            cidades.filter((item) => {
-                if (item.city.innerText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1)
-                    item.city.style.display = '';
-                else
-                    item.city.style.display = 'none';
-            });
-        });
-    }
-    filtroPesquisaCidade();
 }
 pegaCidades();
 function imprimirTabela() {
@@ -834,16 +831,12 @@ function imprimirTabela() {
     //     tabelaBody.innerHTML += '<tr><td>' + item.city + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + estadosSigla + '</td></tr>';
     // }
 
-    for (let i = index; i < index + tamanhoDaPagina; i++) {
-        if (cidades[i] == undefined)           
-        tabelaBody.innerHTML += '<tr><td>' + 'erro' + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + 'erro' + '</td></tr>';
-        else
+    for (let i = index; i < index + (tamanhoDaPagina < cidades.length - index ? tamanhoDaPagina : cidades.length % 10); i++) {
         tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
     }
 }
 function voltarInicio() {
-    if (index = tamanhoDaPagina)
-        index -= tamanhoDaPagina;
+    index = 0;
     imprimirTabela();
 }
 function avancarPagina() {
@@ -886,4 +879,3 @@ setTimeout(() => {
     }
     contagemNumeros();
 }, 2000);
-
