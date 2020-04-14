@@ -775,6 +775,7 @@ if (menuLinksInternos.length) {
 
 // criação da tabela cidade e paginação:
 let cidades = [];
+let estadosSigla = [];
 let index = 0;
 let tamanhoDaPagina = 10;
 let tabela = $('[data-cidade-altura]');
@@ -797,16 +798,15 @@ async function pegaCidades() {
     // map() retorna um array de 27 chaves sendo cada uma um array das cidades do estado //
     // flat() junta todas cidades em um array só de 583 objetos contendo cidade e número de casos //
     cidades = values.map((el) => el.citys).flat();
-    // tentativa de gerar lista de estados para as cidades
-    // console.log(values[0].citys.length);
-    let estadosSigla = values.map(retornaEstado);
+
+    // Gera lista de seiglas de estados para as cidades //
+    estadosSigla = values.map(retornaEstado).flat(Infinity);
     function retornaEstado(sigla) {
-        let arrayEstados = Array(sigla.citys.length).fill(sigla.state).flat(Infinity);
-        return arrayEstados;
+        return Array(sigla.citys.length).fill(sigla.state);
     }
-    console.log(estadosSigla);
 
     imprimirTabela();
+
     // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
     tabela.style.display = "table";
     spinner.style.display = "none";
@@ -829,14 +829,17 @@ async function pegaCidades() {
 pegaCidades();
 function imprimirTabela() {
     tabelaBody.innerHTML = "";
-    for (item of cidades.slice(index, index + tamanhoDaPagina)) {
-        tabelaBody.innerHTML += '<tr><td>' + item.city + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td></tr>';
-    }
-
     // ou poderia usar:
-    // for (let i = index; i<index + tamanhoDaPagina; i++) {
-    //     tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
+    // for (item of cidades.slice(index, index + tamanhoDaPagina)) {
+    //     tabelaBody.innerHTML += '<tr><td>' + item.city + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + estadosSigla + '</td></tr>';
     // }
+
+    for (let i = index; i < index + tamanhoDaPagina; i++) {
+        if (cidades[i] == undefined)           
+        tabelaBody.innerHTML += '<tr><td>' + 'erro' + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + 'erro' + '</td></tr>';
+        else
+        tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
+    }
 }
 function voltarInicio() {
     if (index = tamanhoDaPagina)
