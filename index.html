@@ -11,7 +11,7 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -28,11 +28,16 @@
 </head>
 
 <body>
+    <div data-fundo-spinner>
+        <img src="images/load-site.gif" width="400px" height="300px">
+    </div>
 
+    <!-- barra de navegação -->
     <nav>
         <button class="toggle-sidebar">☰</button> <span class="toggle-sidebar">Menu</span>
     </nav>
 
+    <!-- corpo principal da página -->
     <div class="container-fluid">
         <div class="row" style="flex-wrap: nowrap!important;">
 
@@ -45,14 +50,14 @@
                     <a href="#informacoes">
                         <li><i class="fa fa-warning"></i> INFORMAÇÕES</li>
                     </a>
-                    <a href="#dadosLocalidade">
-                        <li><i class="fa fa-map-marker"></i> DADOS POR LOCALIDADE</li>
+                    <a href="#graficos">
+                        <li><i class="fa fa-bar-chart"></i> GRÁFICOS</li>
                     </a>
                     <a href="#mapa">
                         <li><i class="fa fa-map"></i> MAPA</li>
                     </a>
-                    <a href="#graficos">
-                        <li><i class="fa fa-bar-chart"></i> GRÁFICOS</li>
+                    <a href="#dadosLocalidade">
+                        <li><i class="fa fa-map-marker"></i> DADOS POR LOCALIDADE</li>
                     </a>
                     <a href="#linksUteis">
                         <li><i class="fa fa-link"></i> LINKS ÚTEIS</li>
@@ -437,7 +442,7 @@
                     <div data-info-mapa class="rounded container shadow-box py-5 my-5 px-5 border-violet"
                         data-efeito-hover>
                         <h1 data-titulo-secao>CLIQUE EM UM DOS ESTADOS</h1><br>
-                        <div class="table-responsive rounded" data-left>
+                        <div class="table-responsive rounded">
                             <table class="table">
                                 <thead class="thead-dark">
                                     <tr>
@@ -455,7 +460,7 @@
                                 </thead>
                             </table>
                         </div>
-                        <div data-mapa-width data-left>
+                        <div data-mapa-width>
                             <svg version="1.1" id="svg-map" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 450 460"
                                 enable-background="new 0 0 450 460" xml:space="preserve">
@@ -818,8 +823,8 @@
 
                 <!-- NAVEGAÇÃO ABAS START -->
                 <div class="container" id="dadosLocalidade" data-top>
-                    <div data-efeito-hover>
-                        <div class="bg-white shadow-box rounded border-bluedark">
+                    <div class="border-bluedark rounded" data-efeito-hover>
+                        <div class="bg-white shadow-box">
                             <h1 class="text-center pt-5 pb-4 bluedark">CASOS POR LOCALIDADE</h1>
                             <div class="tab">
                                 <button data-aba-cidade class="tablinks text-white active">CIDADE</button>
@@ -837,24 +842,39 @@
                                             class="rounded">
                                     </form>
 
-                                    <div class="container rounded" data-fixar>
-                                        
+                                    <div>
+
+                                        <div id="spinner">
+                                            <img src="images/load-table.gif" width="300px" height="220px">
+                                        </div>
+
                                         <table class="table" id="tabelaCidade" data-cidade-altura>
                                             <thead class="thead-dark">
                                                 <tr>
-                                                    <th>CIDADE</th>
+                                                    <th style="border-top-left-radius: 4px !important;">CIDADE</th>
                                                     <th style="border-top-right-radius: 4px !important;">CASOS
                                                         CONFIRMADOS
                                                     </th>
                                                 </tr>
                                             </thead>
+
+                                            <tbody id="tabela-body"></tbody>
+
                                         </table>
+
+                                        <div data-paginacao>
+                                            <button id="voltarInicio"><i class="fa fa-fast-backward"></i></button>
+                                            <button id="anterior"><i class="fa fa-step-backward"></i> Anterior</button>
+                                            <button id="proximo">Próximo <i class="fa fa-step-forward"></i></button>
+                                            <button id="irFinal"><i class="fa fa-fast-forward"></i></button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="container tabcontent bg-white shadow-box rounded-bottom" id="abaEstado">
+                        <div class="container tabcontent bg-white pb-5 shadow-box" id="abaEstado">
                             <div class="container table-responsive">
                                 <h2 class="text-center py-3 text-dark">BUSCAR POR ESTADO</h2>
                                 <form autocomplete="off" data-pesquisar-estado>
@@ -880,7 +900,7 @@
                             </div>
                         </div>
 
-                        <div class="container tabcontent bg-white shadow-box rounded-bottom" id="abaPais">
+                        <div class="container tabcontent bg-white pb-5 shadow-box" id="abaPais">
                             <div class="container table-responsive">
                                 <h2 class="text-center py-3 text-dark">BUSCAR POR PAÍS</h2>
                                 <form autocomplete="off" data-pesquisar-pais>
@@ -990,6 +1010,7 @@
             </div>
         </div>
 
+        <!-- botão voltar ao topo -->
         <div data-topo><img src="images/topo.png" alt="Voltar ao topo"></div>
 
         <script src="script.js"></script>

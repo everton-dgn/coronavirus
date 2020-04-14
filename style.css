@@ -21,14 +21,14 @@ nav {
     background: #fff;
     box-shadow: 0 3px 16px #050a25bf !important;
     z-index: 9999;
-    display: flex!important;
-    align-items: center!important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 nav span {
     color: #212529;
     font-size: 1.5rem;
-    margin-left: 8px!important;
+    margin-left: 8px !important;
 }
 
 nav button {
@@ -104,11 +104,11 @@ nav button:hover {
 }
 
 .collapsed {
-    max-width: 0!important;
-    opacity: 0!important;
-    padding: 0!important;
-    transform: translateX(-200%)!important;
-    transition: all .3s ease!important;
+    max-width: 0 !important;
+    opacity: 0 !important;
+    padding: 0 !important;
+    transform: translateX(-200%) !important;
+    transition: all .3s ease !important;
 }
 
 #sidebar button {
@@ -182,8 +182,8 @@ tbody:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-tbody:nth-child(odd) {
-    background-color: #fff;
+#tabela-body tr:nth-child(odd) {
+    background-color: #fff !important;
 }
 
 .table tbody+tbody {
@@ -633,11 +633,15 @@ button {
 }
 
 .animar {
-    opacity: 1!important;
-    transform: translate3d(0, 0, 0)!important;
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
 }
 
 @media screen and (max-width: 800px) {
+
+    [data-paginacao] button {
+        font-size: .8rem!important;
+    }
 
     [data-titulo-banner] {
         font-size: 1.8rem !important;
@@ -701,4 +705,44 @@ button {
     #sidebar ul li {
         font-size: .7rem;
     }
+}
+
+[data-fundo-spinner] {
+    left: 0 !important;
+    top: 0 !important;
+    position: fixed !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    background: #dfe5ff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 10000 !important;
+    height: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#spinner {
+    display: flex;
+    justify-content: center;
+}
+
+[data-paginacao] {
+    width: 100%;
+    text-align: center;
+}
+
+[data-paginacao] button {
+    border: none;
+    background: #212529;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 300!important;
+    transition: all .2s linear;
+}
+
+[data-paginacao] button:hover {
+background: #2a3036;
+transform: translateY(-4px);
 }

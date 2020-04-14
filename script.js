@@ -1,6 +1,15 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+// esconde spinners do load após 2s // 
+const i = setInterval(function () {
+    clearInterval(i);
+    $('[data-fundo-spinner]').style.display = "none";   
+}, 1900);
+
+// controlar exibição automática do menu retrátil:
+if (window.matchMedia("(min-width:800px)").matches) clickFunction();
+
 // exibe dados do covid-19 do Brasil e do mundo no topo do site
 fetch('https://corona-stats.online/brazil?format=json')
     .then(r => r.json())
@@ -52,7 +61,8 @@ fetch("https://covid19-brazil-api.now.sh/api/report/v1")
         function estadosBrasileiros() {
             // e.preventDefault();
             const nomedoEstado = this.getAttribute("title");
-            $('[data-info-mapa] h1').innerHTML = nomedoEstado;
+            if ($('div#mapa.container.animar'))
+                $('[data-info-mapa] h1').innerHTML = nomedoEstado;
 
             for (let i = 1; i < 28; i++) {
                 $$('#tabelaEstado tr')[i].getAttribute('title');
@@ -638,18 +648,6 @@ async function handleResults(mortes) {
 }
 handleResults(coronaVirus2());
 
-// cria tabela cidade:
-fetch("https://api.coronaanalytic.com/journal")
-    .then(response => response.json())
-    .then(({ values }) => {
-        let cidades = values.map((el) => el.citys).flat();
-        
-        cidades.forEach(item => {
-            $('[data-cidade-altura]').innerHTML += '<tr><td>' + item.city + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td></tr>'
-        });
-
-    });
-
 // cria tabela país:
 fetch("https://corona-stats.online/?format=json")
     .then(response => response.json())
@@ -761,7 +759,7 @@ if (menuLinksInternos.length) {
         const easing = function (t) {
             return (--t) * t * t + 1
         };
-        atu += .5; // move de 2 em 2 pixel. Aumentando o valor, irá aumentar a velocidade
+        atu += .7; // move de 2 em 2 pixel. Aumentando o valor, irá aumentar a velocidade
         let ease = easing(atu / 100);
         let del = des - old;
         del *= ease;
@@ -775,3 +773,70 @@ if (menuLinksInternos.length) {
     }
 
 }
+
+// criação da tabela cidade e paginação:
+let cidades = [];
+let index = 0;
+let tamanhoDaPagina = 10;
+let tabela = $('[data-cidade-altura]');
+let tabelaBody = $('#tabela-body');
+let voltarInicioP = $('#voltarInicio');
+let botaoProximo = $('#proximo');
+let botaoAnterior = $('#anterior');
+let irFinalP = $('#irFinal');
+
+async function pegaCidades() {
+    let spinner = $('#spinner');
+    tabela.style.display = "none";
+
+    let requisicao = await fetch("https://api.coronaanalytic.com/journal");
+
+    let resultados = await requisicao.json();
+
+    let { values } = resultados; // sintáxe equivalente a resultados.values //
+    // resultado: array com 27 objetos, cada objeto tem 3 itens, sendo o último um array com todas cidades do estado //
+    // map() retorna um array de 27 chaves sendo cada uma um array das cidades do estado //
+    // flat() junta todas cidades em um array só de 583 objetos contendo cidade e número de casos //
+    cidades = values.map((el) => el.citys).flat();
+
+    imprimirTabela();
+    // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
+    tabela.style.display = "table";
+    spinner.style.display = "none";
+}
+pegaCidades();
+function imprimirTabela() {
+    tabelaBody.innerHTML = "";
+    for (item of cidades.slice(index, index + tamanhoDaPagina)) {
+        tabelaBody.innerHTML += '<tr><td>' + item.city + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td></tr>';
+    }
+    // ou poderia usar:
+    // for (let i = index; i<index + tamanhoDaPagina; i++) {
+    //     tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
+    // }
+}
+function voltarInicio() {
+    if (index = tamanhoDaPagina)
+        index -= tamanhoDaPagina;
+    imprimirTabela();
+}
+function avancarPagina() {
+    if (index <= (cidades.length - cidades.length % 10 - 10))
+        index += tamanhoDaPagina;
+    imprimirTabela();
+}
+function recuarPagina() {
+    if (index >= tamanhoDaPagina)
+        index -= tamanhoDaPagina;
+    imprimirTabela();
+}
+function irFinal() {
+    if (index = cidades.length - cidades.length % 10 - 10)
+        index += tamanhoDaPagina;
+    imprimirTabela();
+}
+voltarInicioP.addEventListener("click", voltarInicio);
+botaoProximo.addEventListener("click", avancarPagina);
+botaoAnterior.addEventListener("click", recuarPagina);
+irFinalP.addEventListener("click", irFinal);
+
