@@ -809,14 +809,13 @@ async function pegaCidades() {
     $("#pesquisarCidade").addEventListener("keyup", () => {
         var valor = $("#pesquisarCidade").value.toLowerCase();
 
-        cidades.filter((item) => {
-            if (item.city.toLowerCase().indexOf(valor) > -1)
-                item.city.style.display = '';
-            else
-                item.city.style.display = 'none';
-        });
+        if (item.city.toLowerCase().indexOf(valor) > -1) {
+            tabelaBody.innerHTML = "";
+            for (let i = index; i < index + (tamanhoDaPagina < cidades.length - index ? tamanhoDaPagina : cidades.length % 10); i++) {
+                tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
+            }
+        }
     });
-
     imprimirTabela();
 
     // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
@@ -865,11 +864,17 @@ setTimeout(() => {
         const numeros = $$('[data-contagem]');
         numeros.forEach((item) => {
             const total = +item.innerText;
+
             const incremento = Math.floor(total / 100);
+
             let start = 0;
             const timer = setInterval(() => {
-                start = start + incremento;
-                item.innerText = start;
+                if (total > 100) {
+                    start = start + incremento;
+                    item.innerText = start;
+                } else {
+                    item.innerText = start++;
+                }
                 if (start > total) {
                     item.innerText = total.toLocaleString('pt-BR');
                     clearInterval(timer);
