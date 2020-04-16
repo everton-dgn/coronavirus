@@ -727,7 +727,7 @@ function openCity(evt, menuName) {
     evt.currentTarget.className += " active";
 }
 
-// barra de navegação:
+// barra de navegação/menu:
 $("button.toggle-sidebar").addEventListener('click', clickFunction);
 $("span.toggle-sidebar").addEventListener('click', clickFunction);
 function clickFunction() {
@@ -780,6 +780,8 @@ if (menuLinksInternos.length) {
 
     function menuTop(e) {
         e.preventDefault();
+
+        if (window.matchMedia("(max-width:800px)").matches) clickFunction();
 
         const id = this.getAttribute('href');
         const alturaMenu = $('nav').scrollHeight;
@@ -885,7 +887,7 @@ function voltarInicio() {
     imprimirTabela();
 }
 function avancarPagina() {
-    if (index <= (cidades.length - cidades.length % 10 - 10))
+    if (index <= 570)
         index += tamanhoDaPagina;
     imprimirTabela();
 }
