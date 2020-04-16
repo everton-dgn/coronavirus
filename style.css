@@ -72,7 +72,7 @@ nav button:hover {
     text-shadow: 1px 1px 6px #000;
     display: flex;
     align-items: baseline;
-    transition: all .3s linear;
+    transition: all .15s linear;
 }
 
 #sidebar ul li:hover {
@@ -100,7 +100,13 @@ nav button:hover {
     position: sticky;
     box-shadow: inset -15px -14px 22px 0px #00000094, 3px 0 16px #050a25bf;
     z-index: 999 !important;
-    transition: all 0.3s ease !important;
+    transition: background 30s linear !important;
+}
+
+#sidebar:hover {
+    background: url('images/background/8.jpg') no-repeat left !important;
+    background-size: cover !important;
+    transition: background 30s linear !important;
 }
 
 .collapsed {
@@ -620,12 +626,6 @@ button {
     transform: translate3d(-30px, 0, 0);
 }
 
-[data-top] {
-    opacity: 0;
-    transition: all .4s linear;
-    transform: translate3d(0, -30px, 0);
-}
-
 [data-bottom] {
     opacity: 0;
     transition: all .4s linear;
@@ -639,8 +639,12 @@ button {
 
 @media screen and (max-width: 800px) {
 
+    [data-left-icones] h5 {
+        display: grid!important;
+    }
+
     [data-paginacao] button {
-        font-size: .8rem!important;
+        font-size: .8rem !important;
     }
 
     [data-titulo-banner] {
@@ -738,11 +742,11 @@ button {
     background: #212529;
     color: #fff;
     border-radius: 4px;
-    font-weight: 300!important;
+    font-weight: 300 !important;
     transition: all .2s linear;
 }
 
 [data-paginacao] button:hover {
-background: #2a3036;
-transform: translateY(-4px);
+    background: #2a3036;
+    transform: translateY(-4px);
 }

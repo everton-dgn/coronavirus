@@ -5,7 +5,42 @@ const $$ = document.querySelectorAll.bind(document);
 const i = setInterval(function () {
     clearInterval(i);
     $('[data-fundo-spinner]').style.display = "none";
+    contagemNumeros();
 }, 1900);
+
+// animação contagem de números no painel //
+function contagemNumeros() {
+    const numeros = $$('[data-contagem]');
+    numeros.forEach((item) => {
+        const total = +item.innerText;
+
+        const incremento = Math.floor(total / 100);
+
+        let start = 0;
+        if (total > 100) {
+            const timer = setInterval(() => {
+
+                start = start + incremento;
+                item.innerText = start.toLocaleString('pt-BR');
+
+                if (start > total) {
+                    item.innerText = total.toLocaleString('pt-BR');
+                    clearInterval(timer);
+                }
+            }, 100 * Math.random());
+        } else {
+            const timer = setInterval(() => {
+
+                item.innerText = (start++).toLocaleString('pt-BR');
+
+                if (start > total) {
+                    item.innerText = total.toLocaleString('pt-BR');
+                    clearInterval(timer);
+                }
+            }, 200);
+        }
+    });
+}
 
 // controlar exibição automática do menu retrátil:
 if (window.matchMedia("(min-width:800px)").matches) clickFunction();
@@ -20,14 +55,14 @@ fetch('https://corona-stats.online/brazil?format=json')
         $('[data-hoje]').innerHTML = data.data[0].todayDeaths;
         $('[data-novos]').innerHTML = data.data[0].todayCases;
         $('[data-deaths]').innerHTML = data.data[0].deaths;
-        $('[data-mortalidade]').innerHTML = parseFloat((data.data[0].deaths * 100 / data.data[0].confirmed).toFixed(1)) + '%';
+        $('[data-mortalidade]').innerHTML = parseFloat((data.data[0].deaths * 100 / data.data[0].confirmed).toFixed(1));
 
         // Mundo:
         $('[data-mundo-confirmed]').innerHTML = data.worldStats.confirmed;
         $('[data-mundo-hoje]').innerHTML = data.worldStats.todayDeaths;
         $('[data-mundo-novos]').innerHTML = data.worldStats.todayCases;
         $('[data-mundo-deaths]').innerHTML = data.worldStats.deaths;
-        $('[data-mundo-mortalidade]').innerHTML = parseFloat((data.worldStats.deaths * 100 / data.worldStats.confirmed).toFixed(1)) + '%';
+        $('[data-mundo-mortalidade]').innerHTML = parseFloat((data.worldStats.deaths * 100 / data.worldStats.confirmed).toFixed(1));
     });
 
 // mostra data atual:
@@ -719,7 +754,7 @@ function topo() {
 }
 
 // lazyload
-const container = $$('[data-left], [data-bottom], [data-top]');
+const container = $$('[data-left], [data-bottom]');
 const windowMetade = window.innerHeight * 0.6;
 function animaScroll() {
     container.forEach((item) => {
@@ -802,20 +837,31 @@ async function pegaCidades() {
     // Gera lista de seiglas de estados para as cidades //
     estadosSigla = values.map(retornaEstado).flat(Infinity);
     function retornaEstado(sigla) {
-        return Array(sigla.citys.length).fill(sigla.state);
+        return Array(sigla.citys.length).fill(sigla.state); // cria quantidade x de arrays vazios e adiciona em cada slot um valor da iteração
     }
 
-    // pesquisar cidade:
-    $("#pesquisarCidade").addEventListener("keyup", () => {
-        var valor = $("#pesquisarCidade").value.toLowerCase();
+    // pesquisar cidade start // // resolver futuramente //
+   /*  $("#pesquisarCidade").addEventListener("keyup", buscarCidades);
 
-        if (item.city.toLowerCase().indexOf(valor) > -1) {
-            tabelaBody.innerHTML = "";
-            for (let i = index; i < index + (tamanhoDaPagina < cidades.length - index ? tamanhoDaPagina : cidades.length % 10); i++) {
-                tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
+    function buscarCidades() {
+        var valor = $("#pesquisarCidade").value;
+
+        cidades.filter((item) => {    
+
+            if (item.city.indexOf(valor) > -1) {
+                tabelaBody.innerHTML = "";
+
+                for (let i = 0; i < 20; i++) {
+                    tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
+                }
+
+            } else {
+                item.innerHTML = "";
             }
-        }
-    });
+
+        });
+    } */
+    // pesquisar cidade the end //
     imprimirTabela();
 
     // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
@@ -858,29 +904,4 @@ botaoProximo.addEventListener("click", avancarPagina);
 botaoAnterior.addEventListener("click", recuarPagina);
 irFinalP.addEventListener("click", irFinal);
 
-// animação contagem de números no painel //
-setTimeout(() => {
-    function contagemNumeros() {
-        const numeros = $$('[data-contagem]');
-        numeros.forEach((item) => {
-            const total = +item.innerText;
 
-            const incremento = Math.floor(total / 100);
-
-            let start = 0;
-            const timer = setInterval(() => {
-                if (total > 100) {
-                    start = start + incremento;
-                    item.innerText = start;
-                } else {
-                    item.innerText = start++;
-                }
-                if (start > total) {
-                    item.innerText = total.toLocaleString('pt-BR');
-                    clearInterval(timer);
-                }
-            }, 40);
-        });
-    }
-    contagemNumeros();
-}, 2000);
