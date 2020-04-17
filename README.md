@@ -6,20 +6,21 @@
 
 Este projeto tem como objetivo principal ajudar as pessoas promovendo informações sobre o COVID-19 (novo Coronavírus no Brasil).
 
+<b>- Link para vídeo de demonstração:</b> <br>
 https://www.youtube.com/watch?v=Nbh3UVfmS9I&t=4s
 
-- Link para visualização:
+<b>- Link para visualização:</b> <br>
 https://querocriarsite.com/projetos/coronavirus/ 
 
 ## Features:
 
 - [x] Projeto 100% responsivo.
 
-- [x] Foram utilizadas 4 API:
-https://corona-stats.online/brazil?format=json
-https://covid19-brazil-api.now.sh/api/report/v1
-https://pomber.github.io/covid19/timeseries.json
-https://api.coronaanalytic.com/journal
+- [x] Foram utilizadas 4 API: <br>
+https://corona-stats.online/brazil?format=json <br>
+https://covid19-brazil-api.now.sh/api/report/v1 <br>
+https://pomber.github.io/covid19/timeseries.json <br>
+https://api.coronaanalytic.com/journal <br>
 
 - [x] Atualiza todo os dados em tempo real.
 
