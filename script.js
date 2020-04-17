@@ -843,26 +843,26 @@ async function pegaCidades() {
     }
 
     // pesquisar cidade start // // resolver futuramente //
-   /*  $("#pesquisarCidade").addEventListener("keyup", buscarCidades);
-
-    function buscarCidades() {
-        var valor = $("#pesquisarCidade").value;
-
-        cidades.filter((item) => {    
-
-            if (item.city.indexOf(valor) > -1) {
-                tabelaBody.innerHTML = "";
-
-                for (let i = 0; i < 20; i++) {
-                    tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
-                }
-
-            } else {
-                item.innerHTML = "";
-            }
-
-        });
-    } */
+    /*  $("#pesquisarCidade").addEventListener("keyup", buscarCidades);
+ 
+     function buscarCidades() {
+         var valor = $("#pesquisarCidade").value;
+ 
+         cidades.filter((item) => {    
+ 
+             if (item.city.indexOf(valor) > -1) {
+                 tabelaBody.innerHTML = "";
+ 
+                 for (let i = 0; i < 20; i++) {
+                     tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
+                 }
+ 
+             } else {
+                 item.innerHTML = "";
+             }
+ 
+         });
+     } */
     // pesquisar cidade the end //
     imprimirTabela();
 
@@ -877,7 +877,7 @@ function imprimirTabela() {
     // for (item of cidades.slice(index, index + tamanhoDaPagina)) {
     //     tabelaBody.innerHTML += '<tr><td>' + item.city + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + estadosSigla + '</td></tr>';
     // }
-
+    console.log('index = ' + index + ' tamanho da página = ' + tamanhoDaPagina);
     for (let i = index; i < index + (tamanhoDaPagina < cidades.length - index ? tamanhoDaPagina : cidades.length % 10); i++) {
         tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
     }
