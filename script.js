@@ -836,34 +836,41 @@ async function pegaCidades() {
     // flat() junta todas cidades em um array só de 583 objetos contendo cidade e número de casos //
     cidades = values.map((el) => el.citys).flat();
 
-    // Gera lista de seiglas de estados para as cidades //
+    // pesquisar cidade start //
+    // Gera lista de siglas de estados para as cidades em um array //
     estadosSigla = values.map(retornaEstado).flat(Infinity);
     function retornaEstado(sigla) {
         return Array(sigla.citys.length).fill(sigla.state); // cria quantidade x de arrays vazios e adiciona em cada slot um valor da iteração
     }
 
-    // pesquisar cidade start // // resolver futuramente //
-    /*  $("#pesquisarCidade").addEventListener("keyup", buscarCidades);
- 
-     function buscarCidades() {
-         var valor = $("#pesquisarCidade").value;
- 
-         cidades.filter((item) => {    
- 
-             if (item.city.indexOf(valor) > -1) {
-                 tabelaBody.innerHTML = "";
- 
-                 for (let i = 0; i < 20; i++) {
-                     tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
-                 }
- 
-             } else {
-                 item.innerHTML = "";
-             }
- 
-         });
-     } */
+    $("#pesquisarCidade").addEventListener("keyup", buscarCidades);
+
+    function buscarCidades() {
+
+        // lista (e une) em um array os arrays [cidade, estado, casos] //
+        let dadosCompletos = cidades.map((item, index) => {
+            return [item.city, estadosSigla[index], item.cases]
+        });
+
+        // recebe valor digitado //
+        const valor = $("#pesquisarCidade").value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+        // retorna os 10 primeiro itens do array que possui a cidade correspondente ao texto digitado //
+        const cidadesFiltradas = dadosCompletos.filter(item => {
+            return item[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1;
+        }).slice(0, 10);
+
+        // limpa a tabela antes de imprimir as 10 linhas da tabela //
+        tabelaBody.innerHTML = "";
+
+        // imprime as 10 linhas filtradas na tabela //
+        cidadesFiltradas.map(item => {
+            tabelaBody.innerHTML += '<tr><td>' + item[0] + '</td>' + '<td>' + item[1] + '</td>' + '<td>' + item[2].toLocaleString('pt-BR') + '</td></tr>';
+        });
+
+    }
     // pesquisar cidade the end //
+
     imprimirTabela();
 
     // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
@@ -873,11 +880,7 @@ async function pegaCidades() {
 pegaCidades();
 function imprimirTabela() {
     tabelaBody.innerHTML = "";
-    // ou poderia usar:
-    // for (item of cidades.slice(index, index + tamanhoDaPagina)) {
-    //     tabelaBody.innerHTML += '<tr><td>' + item.city + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + estadosSigla + '</td></tr>';
-    // }
-    console.log('index = ' + index + ' tamanho da página = ' + tamanhoDaPagina);
+
     for (let i = index; i < index + (tamanhoDaPagina < cidades.length - index ? tamanhoDaPagina : cidades.length % 10); i++) {
         tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
     }
