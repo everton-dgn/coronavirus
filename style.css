@@ -179,7 +179,7 @@ nav button:hover {
 }
 
 [data-lupa] {
-    padding: 12px 13px 12px 13px;
+    padding: 12px 13px;
     margin-bottom: 12px;
     position: absolute;
 }
@@ -645,6 +645,18 @@ button {
 }
 
 @media screen and (max-width: 800px) {
+
+    [data-lupa] {
+        padding: 5px 13px!important;
+    }
+
+    .table td, .table th {
+        padding: .2rem .75rem!important;
+    }
+
+    #pesquisarEstado, #pesquisarPais, #pesquisarCidade {
+        padding: 4px 20px 4px 40px!important;
+    }
 
     [data-left-icones] h5 {
         display: grid !important;
