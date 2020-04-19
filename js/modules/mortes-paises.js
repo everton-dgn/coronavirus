@@ -1,79 +1,5 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-
-// esconde spinners do load após 2s // 
-const i = setInterval(function () {
-    clearInterval(i);
-    $('[data-fundo-spinner]').style.display = "none";
-    contagemNumeros();
-}, 1900);
-
-// animação contagem de números no painel //
-function contagemNumeros() {
-    const numeros = $$('[data-contagem]');
-    numeros.forEach((item) => {
-        const total = +item.innerText;
-
-        const incremento = Math.floor(total / 100);
-
-        let start = 0;
-        if (total > 100) {
-            const timer = setInterval(() => {
-
-                start = start + incremento;
-                item.innerText = start.toLocaleString('pt-BR');
-
-                if (start > total) {
-                    item.innerText = total.toLocaleString('pt-BR');
-                    clearInterval(timer);
-                }
-            }, 100 * Math.random());
-        } else {
-            const timer = setInterval(() => {
-
-                item.innerText = (start++).toLocaleString('pt-BR');
-
-                if (start > total) {
-                    item.innerText = total.toLocaleString('pt-BR');
-                    clearInterval(timer);
-                }
-            }, 200);
-        }
-    });
-}
-
-// controlar exibição automática do menu retrátil:
-if (window.matchMedia("(min-width:800px)").matches) clickFunction();
-
-// exibe dados do covid-19 do Brasil e do mundo no topo do site
-fetch('https://corona-stats.online/brazil?format=json')
-    .then(r => r.json())
-    .then(data => {
-        // Brasil:
-        $('[data-date]').innerHTML = hoje;
-        $('[data-confirmed]').innerHTML = data.data[0].confirmed;
-        $('[data-hoje]').innerHTML = data.data[0].todayDeaths;
-        $('[data-novos]').innerHTML = data.data[0].todayCases;
-        $('[data-deaths]').innerHTML = data.data[0].deaths;
-        $('[data-mortalidade]').innerHTML = parseFloat((data.data[0].deaths * 100 / data.data[0].confirmed).toFixed(1));
-
-        // Mundo:
-        $('[data-mundo-confirmed]').innerHTML = data.worldStats.confirmed;
-        $('[data-mundo-hoje]').innerHTML = data.worldStats.todayDeaths;
-        $('[data-mundo-novos]').innerHTML = data.worldStats.todayCases;
-        $('[data-mundo-deaths]').innerHTML = data.worldStats.deaths;
-        $('[data-mundo-mortalidade]').innerHTML = parseFloat((data.worldStats.deaths * 100 / data.worldStats.confirmed).toFixed(1));
-    });
-
-// mostra data atual:
-const agora = new Date();
-const dia = agora.getDate();
-const mes = agora.getUTCMonth() + 1;
-const ano = agora.getUTCFullYear();
-const hoje = dia.toString().padStart(2, '0') + '/' + mes.toString().padStart(2, '0') + '/' + ano;
-
 // função para converter data
-function converterData(dataPar) {
+export function converterData(dataPar) {
     const dataRecebida = dataPar.replace('-', '/').replace('-', '/').replace('T', ' ').split(' ');
     const dataTratada = dataRecebida[0].split('/');
     const dataAtual = dataTratada[2].padStart(2, '0') + '/' + dataTratada[1].padStart(2, '0') + '/' + dataTratada[0];
@@ -81,37 +7,10 @@ function converterData(dataPar) {
     return dataAtual;
 }
 
-// tabela
-fetch("https://covid19-brazil-api.now.sh/api/report/v1")
-    .then(response => response.json())
-    .then(data => {
-        //cria tabela do estado com atributo title para uso do mapa svg:
-        data.data.forEach((item) => {
-            $('[data-estado-altura]').innerHTML += '<tr title="' + item.state + '"><td>' + item.state + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + item.deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((item.deaths * 100 / item.cases).toFixed(1)) + '%' + '</td>' + '</tr>';
-        });
-
-        // click no estado do mapa exibe dados do estado :
-        $$('a').forEach(item => item.addEventListener('click', estadosBrasileiros));
-
-        function estadosBrasileiros() {
-            // e.preventDefault();
-            const nomedoEstado = this.getAttribute("title");
-            if ($('div#mapa.container.animar'))
-                $('[data-info-mapa] h1').innerHTML = nomedoEstado;
-
-            for (let i = 1; i < 28; i++) {
-                $$('#tabelaEstado tr')[i].getAttribute('title');
-                if ($$('#tabelaEstado tr')[i].getAttribute('title') == nomedoEstado) {
-                    $('[data-info-mapa] table thead').innerHTML = $$('#tabelaEstado thead')[0].innerHTML + $$('#tabelaEstado tbody')[i - 1].innerHTML;
-                }
-            }
-        }
-    });
-
-// fecth para gráfico
-async function coronaVirus2() {
-    const res = await fetch('https://pomber.github.io/covid19/timeseries.json');
-    const data = await res.json();
+// Fornece dados dos países para alimentar os gráficos //
+export async function mortesPorPais() {
+    const resposta = await fetch('https://pomber.github.io/covid19/timeseries.json');
+    const data = await resposta.json();
 
     const dataMortes = [];
     data.Brazil.forEach((item, i) => {
@@ -202,7 +101,8 @@ async function coronaVirus2() {
     return dados;
 }
 
-async function handleResults(mortes) {
+// imprime gráficos com dados da api //
+export async function imprimirGraficos(mortes) {
     const mortesBrasil = await Promise.resolve(mortes);
 
     Chart.defaults.global.defaultFontFamily = "'Poppins', monospace, sans-serif";
@@ -343,6 +243,14 @@ async function handleResults(mortes) {
                 //         return tooltipItem.yLabel + " %";
                 //     }
                 // },
+                callbacks: {
+                    // title: function(data) { // apaga titulo do tooltip
+                    //     return '';
+                    // },
+                    label: function(tooltipItem, data) {
+                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toLocaleString('pt-BR');
+                    }
+                },
                 // backgroundColor
                 titleFontSize: 14,
                 // titleFontColor
@@ -355,7 +263,7 @@ async function handleResults(mortes) {
                 intersect: false,
                 caretSize: 5,
                 bodyFontSize: 14,
-                position: 'nearest',
+                // position: 'nearest',
                 caretPadding: 20,
                 cornerRadius: 4,
                 // borderColor
@@ -487,6 +395,14 @@ async function handleResults(mortes) {
                 }]
             },
             tooltips: {
+                callbacks: {
+                    // title: function(data) { // apaga titulo do tooltip
+                    //     return '';
+                    // },
+                    label: function(tooltipItem, data) {
+                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toLocaleString('pt-BR');
+                    }
+                },
                 mode: 'index',
                 bodySpacing: 8,
                 intersect: false,
@@ -681,232 +597,4 @@ async function handleResults(mortes) {
         }
     });
 }
-handleResults(coronaVirus2());
-
-// cria tabela país:
-fetch("https://corona-stats.online/?format=json")
-    .then(response => response.json())
-    .then(data => {
-        for (let i = 0; i < 184; i++) {
-            $('[data-pais-altura]').innerHTML += '<tr><td><img src="' + data.data[i].countryInfo.flag + '" width="30"></td>' + '<td>' + data.data[i].country + '</td>' + '<td>' + data.data[i].confirmed.toLocaleString('pt-BR') + '</td>' + '<td>' + data.data[i].deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((data.data[i].deaths * 100 / data.data[i].confirmed).toFixed(1)) + '%' + '</td></tr>';
-        }
-
-    });
-
-// Pesquisar país e estado nas tabelas:
-function filtroPesquisa(inputFilter, tableFilter) {
-    $(inputFilter).addEventListener("keyup", () => {
-        var valor = $(inputFilter).value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-
-        Array.from($$(tableFilter)).filter((item) => {
-            if (item.innerText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1)
-                item.style.display = '';
-            else
-                item.style.display = 'none';
-        });
-    });
-}
-filtroPesquisa("#pesquisarPais", "#tabelaPais tbody tr");
-filtroPesquisa("#pesquisarEstado", "#tabelaEstado tbody tr");
-
-// exibir tabelas por abas:
-$('[data-aba-cidade]').addEventListener('click', () => openCity(event, 'abaCidade'));
-$('[data-aba-estado]').addEventListener('click', () => openCity(event, 'abaEstado'));
-$('[data-aba-pais]').addEventListener('click', () => openCity(event, 'abaPais'));
-function openCity(evt, menuName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(menuName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-
-// barra de navegação/menu:
-$("button.toggle-sidebar").addEventListener('click', clickFunction);
-$("span.toggle-sidebar").addEventListener('click', clickFunction);
-function clickFunction() {
-
-    $("#sidebar").classList.toggle("collapsed");
-    $("#content").classList.toggle("col-md-12");
-
-}
-
-// voltar ao topo:
-window.onscroll = function () {
-    if (window.scrollY > 400) {
-        document.querySelector('[data-topo]').classList.add('mostrar');
-    } else {
-        document.querySelector('[data-topo]').classList.remove('mostrar');
-    }
-};
-document.querySelector('[data-topo] img').addEventListener('click', topo);
-function topo() {
-    window.scroll({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// lazyload
-const container = $$('[data-left], [data-bottom]');
-const windowMetade = window.innerHeight * 0.6;
-function animaScroll() {
-    container.forEach((item) => {
-        const sectionTop = item.getBoundingClientRect().top;
-        const sectionVisivel = (sectionTop - windowMetade) < 0;
-
-        if (sectionVisivel)
-            item.classList.add('animar');
-        else if (item.classList.contains('animar'))
-            item.classList.remove('animar');
-    });
-}
-animaScroll();
-window.addEventListener('scroll', animaScroll);
-
-// rolagem suave links internos:
-const menuLinksInternos = $$('a[href^="#"]');
-if (menuLinksInternos.length) {
-
-    menuLinksInternos.forEach((item) => {
-        item.addEventListener('click', menuTop);
-    });
-
-    function menuTop(e) {
-        e.preventDefault();
-
-        if (window.matchMedia("(max-width:800px)").matches) clickFunction();
-
-        const id = this.getAttribute('href');
-        const alturaMenu = $('nav').scrollHeight;
-        const topo = $('nav').offsetTop;
-        const distanciaTopo = document.querySelector(id).offsetTop - alturaMenu - topo;
-
-        scrollSuave($('html').scrollTop, distanciaTopo, 0);
-    }
-
-    function scrollSuave(old, des, atu) { // Função que faz o scroll suave
-        const easing = function (t) {
-            return (--t) * t * t + 1
-        };
-        atu += .7; // move de 2 em 2 pixel. Aumentando o valor, irá aumentar a velocidade
-        let ease = easing(atu / 100);
-        let del = des - old;
-        del *= ease;
-        del += old;
-        document.querySelector('html').scrollTo(0, del);
-        if (atu < 100) {
-            window.requestAnimationFrame(function () {
-                scrollSuave(old, des, atu);
-            });
-        }
-    }
-
-}
-
-// criação da tabela cidade e paginação:
-let cidades = [];
-let estadosSigla = [];
-let index = 0;
-let tamanhoDaPagina = 10;
-let tabela = $('[data-cidade-altura]');
-let tabelaBody = $('#tabela-body');
-let voltarInicioP = $('#voltarInicio');
-let botaoProximo = $('#proximo');
-let botaoAnterior = $('#anterior');
-let irFinalP = $('#irFinal');
-
-async function pegaCidades() {
-    let spinner = $('#spinner');
-    tabela.style.display = "none";
-
-    let requisicao = await fetch("https://api.coronaanalytic.com/journal");
-
-    let resultados = await requisicao.json();
-
-    let { values } = resultados; // sintáxe equivalente a resultados.values //
-    // resultado: array com 27 objetos, cada objeto tem 3 itens, sendo o último um array com todas cidades do estado //
-    // map() retorna um array de 27 chaves sendo cada uma um array das cidades do estado //
-    // flat() junta todas cidades em um array só de 583 objetos contendo cidade e número de casos //
-    cidades = values.map((el) => el.citys).flat();
-
-    // pesquisar cidade start //
-    // Gera lista de siglas de estados para as cidades em um array //
-    estadosSigla = values.map(retornaEstado).flat(Infinity);
-    function retornaEstado(sigla) {
-        return Array(sigla.citys.length).fill(sigla.state); // cria quantidade x de arrays vazios e adiciona em cada slot um valor da iteração
-    }
-
-    $("#pesquisarCidade").addEventListener("keyup", buscarCidades);
-
-    function buscarCidades() {
-
-        // lista (e une) em um array os arrays [cidade, estado, casos] //
-        let dadosCompletos = cidades.map((item, index) => {
-            return [item.city, estadosSigla[index], item.cases]
-        });
-
-        // recebe valor digitado //
-        const valor = $("#pesquisarCidade").value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-
-        // retorna os 10 primeiro itens do array que possui a cidade correspondente ao texto digitado //
-        const cidadesFiltradas = dadosCompletos.filter(item => {
-            return item[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1;
-        }).slice(0, 10);
-
-        // limpa a tabela antes de imprimir as 10 linhas da tabela //
-        tabelaBody.innerHTML = "";
-
-        // imprime as 10 linhas filtradas na tabela //
-        cidadesFiltradas.map(item => {
-            tabelaBody.innerHTML += '<tr><td>' + item[0] + '</td>' + '<td>' + item[1] + '</td>' + '<td>' + item[2].toLocaleString('pt-BR') + '</td></tr>';
-        });
-
-    }
-    // pesquisar cidade the end //
-
-    imprimirTabela();
-
-    // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
-    tabela.style.display = "table";
-    spinner.style.display = "none";
-}
-pegaCidades();
-function imprimirTabela() {
-    tabelaBody.innerHTML = "";
-
-    for (let i = index; i < index + (tamanhoDaPagina < cidades.length - index ? tamanhoDaPagina : cidades.length % 10); i++) {
-        tabelaBody.innerHTML += '<tr><td>' + cidades[i].city + '</td>' + '<td>' + estadosSigla[i] + '</td>' + '<td>' + cidades[i].cases.toLocaleString('pt-BR') + '</td></tr>';
-    }
-}
-function voltarInicio() {
-    index = 0;
-    imprimirTabela();
-}
-function avancarPagina() {
-    if (index <= 570)
-        index += tamanhoDaPagina;
-    imprimirTabela();
-}
-function recuarPagina() {
-    if (index >= tamanhoDaPagina)
-        index -= tamanhoDaPagina;
-    imprimirTabela();
-}
-function irFinal() {
-    if (index = cidades.length - cidades.length % 10 - 10)
-        index += tamanhoDaPagina;
-    imprimirTabela();
-}
-voltarInicioP.addEventListener("click", voltarInicio);
-botaoProximo.addEventListener("click", avancarPagina);
-botaoAnterior.addEventListener("click", recuarPagina);
-irFinalP.addEventListener("click", irFinal);
-
-
+imprimirGraficos(mortesPorPais());

@@ -24,23 +24,11 @@
     <meta name="description"
         content="Este projeto tem como objetivo principal ajudar as pessoas fornecendo informações sobre o COVID-19.">
     <meta name="keywords" content="covid-19, coronavirus, covid 19 no brasil, grafico civid 19">
-
     <meta name="author" content="Éverton Toffanetto">
-    <meta name="copyright" content="© Éverton Toffanetto">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+    <meta name="copyright" content="© Éverton Toffanetto">    
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="css/style.css">
+   <!-- plugin gráfico -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
@@ -52,7 +40,7 @@
     </div>
 
     <!-- barra de navegação -->
-    <nav>
+    <nav id="topo">
         <button class="toggle-sidebar">☰</button> <span class="toggle-sidebar">Menu</span>
     </nav>
 
@@ -437,7 +425,7 @@
                     <div class="shadow-box rounded bg-white px-3 pb-5 border-violet" data-efeito-hover
                         data-ajuste-h-graph>
                         <div class="pt-5 pb-5" data-heigt-graph>
-                            <h1 class="mb-3 violet">TOTAL DE MORTOS POR COVID-19 AO MÊS</h1>
+                            <h1 class="mb-3 violet">TOTAL DE MORTOS POR COVID-19 SOMADOS MÊS A MÊS</h1>
                             <canvas id="2myChart"></canvas>
                         </div>
                     </div>
@@ -447,7 +435,7 @@
                 <div class="container" data-bottom>
                     <div class="shadow-box rounded bg-white px-3 pb-5 border-red" data-efeito-hover data-ajuste-h-graph>
                         <div class="pt-5 pb-5" data-heigt-graph>
-                            <h1 class="mb-3 red">TOTAL DE MORTOS POR COVID-19 AO DIA</h1>
+                            <h1 class="mb-3 red">TOTAL DE MORTOS POR COVID-19 SOMADOS DIA A DIA</h1>
                             <canvas id="myChart"></canvas>
                         </div>
                     </div>
@@ -478,13 +466,15 @@
                                         <th>TOTAL DE MORTOS</th>
                                         <th>TAXA % DE MORTALIDADE</th>
                                     </tr>
+                                </thead>
+                                <tbody id="tabela-body0">
                                     <tr style="visibility: hidden;">
                                         <td>0</td>
                                         <td>0</td>
                                         <td>0</td>
                                         <td>0</td>
                                     </tr>
-                                </thead>
+                                </tbody>
                             </table>
                         </div>
                         <div data-mapa-width>
@@ -890,7 +880,7 @@
 
                                         </table>
 
-                                        <div data-paginacao>
+                                        <div class="paginacao">
                                             <button id="voltarInicio"><i class="fa fa-fast-backward"></i></button>
                                             <button id="anterior"><i class="fa fa-step-backward"></i> Anterior</button>
                                             <button id="proximo">Próximo <i class="fa fa-step-forward"></i></button>
@@ -912,6 +902,9 @@
                                 </form>
 
                                 <div class="container rounded" data-fixar>
+                                    <div id="spinner2">
+                                        <img src="images/load-table.gif" width="300px" height="220px">
+                                    </div>
                                     <table class="table" id="tabelaEstado" data-estado-altura>
                                         <thead class="thead-dark">
                                             <tr>
@@ -923,7 +916,14 @@
                                                 </th>
                                             </tr>
                                         </thead>
+                                        <tbody id="tabela-body2"></tbody>
                                     </table>
+                                    <div class="paginacao">
+                                        <button id="voltarInicio2"><i class="fa fa-fast-backward"></i></button>
+                                        <button id="anterior2"><i class="fa fa-step-backward"></i> Anterior</button>
+                                        <button id="proximo2">Próximo <i class="fa fa-step-forward"></i></button>
+                                        <button id="irFinal2"><i class="fa fa-fast-forward"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -938,6 +938,10 @@
                                 </form>
 
                                 <div class="container rounded" data-fixar>
+                                    <div id="spinner3">
+                                        <img src="images/load-table.gif" width="300px" height="220px">
+                                    </div>
+
                                     <table class="table" id="tabelaPais" data-pais-altura>
                                         <thead class="thead-dark">
                                             <tr>
@@ -950,7 +954,14 @@
                                                 </th>
                                             </tr>
                                         </thead>
+                                        <tbody id="tabela-body3"></tbody>
                                     </table>
+                                    <div class="paginacao">
+                                        <button id="voltarInicio3"><i class="fa fa-fast-backward"></i></button>
+                                        <button id="anterior3"><i class="fa fa-step-backward"></i> Anterior</button>
+                                        <button id="proximo3">Próximo <i class="fa fa-step-forward"></i></button>
+                                        <button id="irFinal3"><i class="fa fa-fast-forward"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1025,12 +1036,15 @@
                                         target="_blank" title="WhatsApp"><i class="fa fa-whatsapp"></i></a></li>
                                 <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://querocriarsite.com/projetos/coronavirus/"
                                         target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="mailto:?subject=COVID-19&body=https%3A//querocriarsite.com/projetos/coronavirus/" target="_blank" title="E-mail"><i class="fa fa-envelope"></i></a>
+                                <li><a href="mailto:?subject=COVID-19&body=https%3A//querocriarsite.com/projetos/coronavirus/"
+                                        target="_blank" title="E-mail"><i class="fa fa-envelope"></i></a>
                                 </li>
                             </ul>
                             <ul>
-                                <li><a href="https://twitter.com/intent/tweet?url=https://querocriarsite.com/projetos/coronavirus/&text=COVID-19" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="https://br.pinterest.com/pin/create/button/?url=https://querocriarsite.com/projetos/coronavirus/&media=https://querocriarsite.com/projetos/coronavirus/images/background/1.jpg&description=Este%20projeto%20tem%20como%20objetivo%20principal%20ajudar%20as%20pessoas%20promovendo%20informa%C3%A7%C3%B5es%20sobre%20o%20COVID-19%20(novo%20Coronav%C3%ADrus%20no%20Brasil)." target="_blank" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                                <li><a href="https://twitter.com/intent/tweet?url=https://querocriarsite.com/projetos/coronavirus/&text=COVID-19"
+                                        target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://br.pinterest.com/pin/create/button/?url=https://querocriarsite.com/projetos/coronavirus/&media=https://querocriarsite.com/projetos/coronavirus/images/background/1.jpg&description=Este%20projeto%20tem%20como%20objetivo%20principal%20ajudar%20as%20pessoas%20promovendo%20informa%C3%A7%C3%B5es%20sobre%20o%20COVID-19%20(novo%20Coronav%C3%ADrus%20no%20Brasil)."
+                                        target="_blank" title="Pinterest"><i class="fa fa-pinterest"></i></a>
                                 </li>
                                 <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=https://querocriarsite.com/projetos/coronavirus/"
                                         target="_blank" title="Likedin"><i class="fa fa-linkedin"></i></a></li>
@@ -1059,7 +1073,8 @@
                                 <li><i class="fa fa-behance"></i></li>
                             </a>
                         </div>
-                        <p class="text-center">Este projeto tem como objetivo principal ajudar as pessoas promovendo informações sobre o
+                        <p class="text-center">Este projeto tem como objetivo principal ajudar as pessoas promovendo
+                            informações sobre o
                             COVID-19 (novo Coronavírus no Brasil).</p>
                     </div>
                     <p class="text-center">Desenvolvido por:</p>
@@ -1071,9 +1086,9 @@
         </div>
 
         <!-- botão voltar ao topo -->
-        <div data-topo><img src="images/topo.png" alt="Voltar ao topo"></div>
+        <div data-topo><a href="#topo"><img src="images/topo.png" alt="Voltar ao topo"></a></div>
 
-        <script src="script.js"></script>
+        <script type="module" src="js/script.js"></script>
 </body>
 
 </html>
