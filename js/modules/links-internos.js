@@ -12,8 +12,6 @@ if (menuLinksInternos.length) {
     function menuTop(e) {
         e.preventDefault();
 
-        if (window.matchMedia("(max-width:800px)").matches) clickFunction();
-
         const id = this.getAttribute('href');
         const alturaMenu = $('nav').scrollHeight;
         const topo = $('nav').offsetTop;
