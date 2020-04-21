@@ -1,11 +1,11 @@
 import { $, $$ } from './help.js';
 
 // esconde spinners do load após 2s // 
-export const spinnerLoad = setInterval(function () {
-    clearInterval(spinnerLoad);
-    $('[data-fundo-spinner]').style.display = "none";
-    animaNumeros();
-}, 1900);
+// export const spinnerLoad = setInterval(function () {
+//     clearInterval(spinnerLoad);
+//     $('[data-fundo-spinner]').style.display = "none";
+//     animaNumeros();
+// }, 1900);
 
 // animação contagem de números no painel //
 export function animaNumeros() {
