@@ -1,4 +1,4 @@
-// import { } from './modules/spinner-load';
+import { } from './modules/spinner-load';
 import { } from './modules/lazyload.js';
 import { } from './modules/anima-numeros.js';
 import { } from './modules/sidebar.js';

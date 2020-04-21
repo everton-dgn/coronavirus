@@ -5,5 +5,6 @@ import { } from './anima-numeros.js';
 export const spinnerLoad = setInterval(function () {
     clearInterval(spinnerLoad);
     $('[data-fundo-spinner]').style.display = "none";
-    teste;
+    animaNumeros();
 }, 1900);
+// spinnerLoad();
