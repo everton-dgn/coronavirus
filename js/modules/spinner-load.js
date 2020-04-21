@@ -7,4 +7,3 @@ export const spinnerLoad = setInterval(function () {
     $('[data-fundo-spinner]').style.display = "none";
     animaNumeros();
 }, 1900);
-// spinnerLoad();
