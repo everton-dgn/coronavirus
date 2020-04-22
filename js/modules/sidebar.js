@@ -1,7 +1,14 @@
 import { $ } from './help.js';
+import { $$ } from './help.js';
 
 // controlar exibição automática da sidebar/menu retrátil:
 if (window.matchMedia("(min-width:800px)").matches) clickFunction();
+
+if (window.matchMedia("(max-width:800px)").matches) {
+    $$('#sidebar a').forEach(item => {
+        item.addEventListener('click', clickFunction);
+    });
+}
 
 // exibir/ocultar barra de navegação sidebar/menu:
 $("button.toggle-sidebar, span.toggle-sidebar").addEventListener('click', clickFunction);

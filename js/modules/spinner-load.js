@@ -1,8 +1,8 @@
 import { $ } from './help.js';
 import { animaNumeros } from './anima-numeros.js';
 
-// // esconde spinners do load após 2s // 
-setTimeout(spinnerLoad, 1900);
+// // esconde spinners do load // 
+setTimeout(spinnerLoad, 2500);
 export function spinnerLoad() {
     $('[data-fundo-spinner]').style.display = "none";
     animaNumeros();
