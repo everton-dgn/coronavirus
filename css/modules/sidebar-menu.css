@@ -9,7 +9,7 @@ nav {
     display: flex !important;
     align-items: center !important;
     border-radius: 0 0 6px 0;
-    box-shadow: 0 14px 24px rgba(62, 57, 107, .2) !important;
+    box-shadow: 8px 8px 24px rgba(62, 57, 107, .2) !important;
 }
 
 .changeMenu {

@@ -1,51 +1,24 @@
 import { $, $$ } from './help.js';
 
 // criação da tabela estado, filtro de pesquisa, paginação e manipulação do mapa:
-let pag = 0;
+let pag = 1;
 let tamanhoPag = 10;
 let estados = [];
 let tabela = $('[data-estado-altura]');
 let tabelaBody = $('#tabela-body2');
 
+$('#pesquisarEstado').addEventListener("input", buscarEstados);
 $('#voltarInicio2').addEventListener("click", voltarInicio);
-$('#proximo2').addEventListener("click", avancarPagina);
-$('#anterior2').addEventListener("click", recuarPagina);
+$('#proximo2').addEventListener("click", avancarPag);
+$('#anterior2').addEventListener("click", recuarPag);
 $('#irFinal2').addEventListener("click", irFinal);
 
 (async function pegaEstado() {
-    let spinner = $('#spinner2');
+    let receberEstados = (await await fetch("https://covid19-brazil-api.now.sh/api/report/v1").then(res => res.json())).data;
 
-    estados = (await await fetch("https://covid19-brazil-api.now.sh/api/report/v1").then(res => res.json())).data;
-
-    // pesquisar estado start //
-    $("#pesquisarEstado").addEventListener("keyup", buscarEstado);
-
-    function buscarEstado() {
-
-        // recebe valor digitado //
-        const valor = $("#pesquisarEstado").value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-
-        // retorna os 10 primeiro itens do array que possui o estado correspondente ao texto digitado //
-        const estadosFiltrados = estados.filter(item => {
-            return item.state.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1;
-        }).slice(0, 10);
-
-        // limpa a tabela antes de imprimir as 10 linhas //
-        tabelaBody.innerHTML = "";
-
-        // imprime as 10 linhas filtradas na tabela //
-        estadosFiltrados.map(item => {
-            tabelaBody.innerHTML += '<tr title="' + item.state + '"><td>' + item.state + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + item.deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((item.deaths * 100 / item.cases).toFixed(1)) + '%' + '</td>' + '</tr>';
-        });
-
-    }
-    // pesquisar estado the end //
-
-    imprimirTabela();
-
-    // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
-    tabela.style.display = "table";
-    spinner.style.display = "none";
+    receberEstados.map(dados => {
+        estados.push(dados);
+    });
 
     // click no estado do mapa exibe dados do estado //
     $$('#svg-map a').forEach(item => item.addEventListener('click', estadosBrasileiros));
@@ -56,9 +29,7 @@ $('#irFinal2').addEventListener("click", irFinal);
         const valor = nomedoEstado.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 
         // retorna o objeto contendo os dados do estado clicado //
-        const estadosFiltradosMapa = estados.filter(item => {
-            return item.state.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1;
-        }).slice(0, 1);
+        const estadosFiltradosMapa = receberEstados.filter(item => item.state.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1).slice(0, 1);
 
         // limpa linha da tabela antes de imprimir uma nova //
         $('#tabela-body0').innerHTML = "";
@@ -69,34 +40,48 @@ $('#irFinal2').addEventListener("click", irFinal);
         });
 
     }
+
+    imprimirTabela();
+
+    // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
+    tabela.style.display = "table";
+    $('#spinner2').style.display = "none";
 })()
 
-function imprimirTabela() {
-    // limpa tabela dos estados antes de imprimir uma nova //
+function buscarEstados(event) {
+    // recebe valor digitado //
+    const valor = event.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+    // retorna os 10 primeiro itens do array que possui o estado correspondente ao texto digitado //
+    const estadosFiltrados = estados.filter(item => item.state.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1).slice(0, 10);
+
+    // imprime as 10 linhas filtradas na tabela //
+    imprimirTabela(estadosFiltrados);
+}
+
+function imprimirTabela(dados) {
+    if (!dados) dados = estados.slice((pag - 1) * tamanhoPag, pag * tamanhoPag);
+
     tabelaBody.innerHTML = "";
 
-    // imprime tabela de estados 10 linhas por vez //
-    for (let i = pag; i < pag + (tamanhoPag < estados.length - pag ? tamanhoPag : estados.length % 10); i++) {
-        tabelaBody.innerHTML += '<tr title="' + estados[i].state + '"><td>' + estados[i].state + '</td>' + '<td>' + estados[i].cases.toLocaleString('pt-BR') + '</td>' + '<td>' + estados[i].deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((estados[i].deaths * 100 / estados[i].cases).toFixed(1)) + '%' + '</td>' + '</tr>';
-    }
+    dados.forEach(item => {
+        tabelaBody.innerHTML += '<tr title="' + item.state + '"><td>' + item.state + '</td>' + '<td>' + item.cases.toLocaleString('pt-BR') + '</td>' + '<td>' + item.deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((item.deaths * 100 / item.cases).toFixed(1)) + '%' + '</td>' + '</tr>';
+    });
 }
 
 function voltarInicio() {
-    pag = 0;
+    pag = 1;
     imprimirTabela();
 }
-function avancarPagina() {
-    if (pag <= 10)
-        pag += tamanhoPag;
+function avancarPag() {
+    if (pag != Math.floor(estados.length / 10) + (estados.length % 10 > 0 ? 1 : 0)) pag++;
     imprimirTabela();
 }
-function recuarPagina() {
-    if (pag >= tamanhoPag)
-        pag -= tamanhoPag;
+function recuarPag() {
+    if (pag != 1) pag--;
     imprimirTabela();
 }
 function irFinal() {
-    if (pag = 10)
-        pag += tamanhoPag;
+    pag = Math.floor(estados.length / 10) + (estados.length % 10 > 0 ? 1 : 0);
     imprimirTabela();
 }

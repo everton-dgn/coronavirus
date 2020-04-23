@@ -1,7 +1,7 @@
 import { $ } from './help.js';
 
 // criação da tabela paises, filtro de pesquisa e paginação:
-let pag = 0;
+let pag = 1
 let tamanhoPag = 10;
 let paises = [];
 let tabela = $('[data-pais-altura]');
@@ -17,10 +17,9 @@ $('#irFinal3').addEventListener("click", irFinal);
     let recebePaises = (await fetch("https://corona-stats.online/?format=json").then(res => res.json())).data;
 
     recebePaises.map(dados => {
-        paises.push(dados)
-        return
+        paises.push(dados);        
     });
-    
+  
     imprimirTabela();
 
     // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
