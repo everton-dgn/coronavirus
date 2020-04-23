@@ -1,16 +1,16 @@
 import { $ } from './help.js';
 
 // criação da tabela cidade, filtro de pesquisa e paginação:
-let pagina = 1;
-let tamanhoDaPagina = 10;
+let pag = 1;
+let tamanhoPag = 10;
 let cidades = [];
 let tabela = $('[data-cidade-altura]');
 let tabelaBody = $('#tabela-body');
 
 $("#pesquisarCidade").addEventListener("input", buscarCidades);
 $('#voltarInicio').addEventListener("click", voltarInicio);
-$('#proximo').addEventListener("click", avancarPagina);
-$('#anterior').addEventListener("click", recuarPagina);
+$('#proximo').addEventListener("click", avancarPag);
+$('#anterior').addEventListener("click", recuarPag);
 $('#irFinal').addEventListener("click", irFinal);
 
 (async function () {
@@ -43,7 +43,7 @@ function buscarCidades(event) {
 }
 
 function imprimirTabela(dados) {
-    if (!dados) dados = cidades.slice((pagina - 1) * tamanhoDaPagina, pagina * tamanhoDaPagina);
+    if (!dados) dados = cidades.slice((pag - 1) * tamanhoPag, pag * tamanhoPag);
 
     tabelaBody.innerHTML = "";
 
@@ -53,18 +53,18 @@ function imprimirTabela(dados) {
 }
 
 function voltarInicio() {
-    pagina = 1;
+    pag = 1;
     imprimirTabela();
 }
-function avancarPagina() {
-    if (pagina != Math.floor(cidades.length / 10) + (cidades.length % 10 > 0 ? 1 : 0)) pagina++;
+function avancarPag() {
+    if (pag != Math.floor(cidades.length / 10) + (cidades.length % 10 > 0 ? 1 : 0)) pag++;
     imprimirTabela();
 }
-function recuarPagina() {
-    if (pagina != 1) pagina--;
+function recuarPag() {
+    if (pag != 1) pag--;
     imprimirTabela();
 }
 function irFinal() {
-    pagina = Math.floor(cidades.length / 10) + (cidades.length % 10 > 0 ? 1 : 0);
+    pag = Math.floor(cidades.length / 10) + (cidades.length % 10 > 0 ? 1 : 0);
     imprimirTabela();
 }

@@ -4,73 +4,64 @@ import { $ } from './help.js';
 let pag = 0;
 let tamanhoPag = 10;
 let paises = [];
-let tabela3 = $('[data-pais-altura]');
-let tabelaBody3 = $('#tabela-body3');
+let tabela = $('[data-pais-altura]');
+let tabelaBody = $('#tabela-body3');
 
-$('#voltarInicio3').addEventListener("click", voltarInicio3);
-$('#proximo3').addEventListener("click", avancarPagina3);
-$('#anterior3').addEventListener("click", recuarPagina3);
-$('#irFinal3').addEventListener("click", irFinal3);
+$('#pesquisarPais').addEventListener("input", buscarPaises);
+$('#voltarInicio3').addEventListener("click", voltarInicio);
+$('#proximo3').addEventListener("click", avancarPag);
+$('#anterior3').addEventListener("click", recuarPag);
+$('#irFinal3').addEventListener("click", irFinal);
 
 (async function pegaPais() {
-    let spinner3 = $('#spinner3');
+    let recebePaises = (await fetch("https://corona-stats.online/?format=json").then(res => res.json())).data;
 
-    paises = (await fetch("https://corona-stats.online/?format=json").then(res => res.json())).data;
-
-    // pesquisar pais start //
-    $("#pesquisarPais").addEventListener("keyup", buscarPais);
-
-    function buscarPais() {
-
-        // recebe valor digitado //
-        const valor3 = $("#pesquisarPais").value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-
-        // retorna os 10 primeiro itens do array que possui o país correspondente ao texto digitado //
-        const paisesFiltrados = paises.filter(item => {
-            return item.country.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor3) > -1;
-        }).slice(0, 10);
-
-        // limpa a tabela antes de imprimir as 10 linhas //
-        tabelaBody3.innerHTML = "";
-
-        // imprime as 10 linhas filtradas na tabela //
-        paisesFiltrados.map(item => {
-            tabelaBody3.innerHTML += '<tr><td><img src="' + item.countryInfo.flag + '" width="30"></td>' + '<td>' + item.country + '</td>' + '<td>' + item.confirmed.toLocaleString('pt-BR') + '</td>' + '<td>' + item.deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((item.deaths * 100 / item.confirmed).toFixed(1)) + '%' + '</td></tr>';
-        });
-
-    }
-    // pesquisar pais the end //
-
-    imprimirTabela3();
+    recebePaises.map(dados => {
+        paises.push(dados)
+        return
+    });
+    
+    imprimirTabela();
 
     // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //
-    tabela3.style.display = "table";
-    spinner3.style.display = "none";
-})()
+    tabela.style.display = "table";
+    $('#spinner3').style.display = "none";
+})();
 
-function imprimirTabela3() {
-    tabelaBody3.innerHTML = "";
+function buscarPaises(event) {
+    // recebe valor digitado //
+    const valor = event.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 
-    for (let i = pag; i < pag + (tamanhoPag < paises.length - pag ? tamanhoPag : paises.length % 10); i++) {
-        tabelaBody3.innerHTML += '<tr><td><img src="' + paises[i].countryInfo.flag + '" width="30"></td>' + '<td>' + paises[i].country + '</td>' + '<td>' + paises[i].confirmed.toLocaleString('pt-BR') + '</td>' + '<td>' + paises[i].deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((paises[i].deaths * 100 / paises[i].confirmed).toFixed(1)) + '%' + '</td></tr>';
-    }
+    // retorna os 10 primeiro itens do array que possui o país correspondente ao texto digitado //
+    const paisesFiltrados = paises.filter(item => item.country.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(valor) > -1).slice(0, 10);
+
+    // Imprime a tabela com os dados filtrados //
+    imprimirTabela(paisesFiltrados);
 }
-function voltarInicio3() {
-    pag = 0;
-    imprimirTabela3();
+
+function imprimirTabela(dados) {
+    if (!dados) dados = paises.slice((pag - 1) * tamanhoPag, pag * tamanhoPag);
+
+    tabelaBody.innerHTML = "";
+
+    dados.forEach(item => {
+        tabelaBody.innerHTML += '<tr><td><img src="' + item.countryInfo.flag + '" width="30"></td>' + '<td>' + item.country + '</td>' + '<td>' + item.confirmed.toLocaleString('pt-BR') + '</td>' + '<td>' + item.deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((item.deaths * 100 / item.confirmed).toFixed(1)) + '%' + '</td></tr>';
+    });
 }
-function avancarPagina3() {
-    if (pag <= 200)
-        pag += tamanhoPag;
-    imprimirTabela3();
+
+function voltarInicio() {
+    pag = 1;
+    imprimirTabela();
 }
-function recuarPagina3() {
-    if (pag >= tamanhoPag)
-        pag -= tamanhoPag;
-    imprimirTabela3();
+function avancarPag() {
+    if (pag != Math.floor(paises.length / 10) + (paises.length % 10 > 0 ? 1 : 0)) pag++;
+    imprimirTabela();
 }
-function irFinal3() {
-    if (pag = 200)
-        pag += tamanhoPag;
-    imprimirTabela3();
+function recuarPag() {
+    if (pag != 1) pag--;
+    imprimirTabela();
+}
+function irFinal() {
+    pag = Math.floor(paises.length / 10) + (paises.length % 10 > 0 ? 1 : 0);
+    imprimirTabela();
 }
