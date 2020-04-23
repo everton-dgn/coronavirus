@@ -7,6 +7,11 @@ let paises = [];
 let tabela = $('[data-pais-altura]');
 let tabelaBody = $('#tabela-body3');
 
+// bloquear enter de recarregar pág. //
+$('#pesquisarPais').addEventListener('keypress', (e) => {
+    if (e.which == 13) e.preventDefault();
+});
+
 $('#pesquisarPais').addEventListener("input", buscarPaises);
 $('#voltarInicio3').addEventListener("click", voltarInicio);
 $('#proximo3').addEventListener("click", avancarPag);
@@ -17,9 +22,9 @@ $('#irFinal3').addEventListener("click", irFinal);
     let recebePaises = (await fetch("https://corona-stats.online/?format=json").then(res => res.json())).data;
 
     recebePaises.map(dados => {
-        paises.push(dados);        
+        paises.push(dados);
     });
-  
+
     imprimirTabela();
 
     // exibe a tabela e esconde o spinner automaticamente após a promessa se resolver (execução vertical do código) //

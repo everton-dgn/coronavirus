@@ -7,6 +7,11 @@ let cidades = [];
 let tabela = $('[data-cidade-altura]');
 let tabelaBody = $('#tabela-body');
 
+// bloquear enter de recarregar pág. //
+$('#pesquisarCidade').addEventListener('keypress', (e) => {
+    if (e.which == 13) e.preventDefault();
+});
+
 $("#pesquisarCidade").addEventListener("input", buscarCidades);
 $('#voltarInicio').addEventListener("click", voltarInicio);
 $('#proximo').addEventListener("click", avancarPag);

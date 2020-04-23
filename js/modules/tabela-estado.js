@@ -7,6 +7,11 @@ let estados = [];
 let tabela = $('[data-estado-altura]');
 let tabelaBody = $('#tabela-body2');
 
+// bloquear enter de recarregar pág. //
+$('#pesquisarEstado').addEventListener('keypress', (e) => {
+    if (e.which == 13) e.preventDefault();
+});
+
 $('#pesquisarEstado').addEventListener("input", buscarEstados);
 $('#voltarInicio2').addEventListener("click", voltarInicio);
 $('#proximo2').addEventListener("click", avancarPag);
