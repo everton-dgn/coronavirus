@@ -4,18 +4,26 @@ nav {
     position: fixed;
     z-index: 9999;
     top: 0;
-    width: 100%;
-    background: #fff;
-    box-shadow: 0 3px 16px #050a25bf !important;
+    background: #ffffffe6;
     z-index: 9999;
     display: flex !important;
     align-items: center !important;
+    border-radius: 0 0 6px 0;
+    box-shadow: 0 14px 24px rgba(62, 57, 107, .2) !important;
+}
+
+.changeMenu {
+    background: transparent; 
+    box-shadow: none!important;  
+    color: #fff!important;  
+    text-shadow: 1px 1px 6px #000;
 }
 
 nav span {
     color: #212529;
     font-size: 1.5rem;
-    margin-left: 8px !important;
+    margin: 0 15px 0 8px !important;
+    cursor: pointer;
 }
 
 nav button {
@@ -23,12 +31,7 @@ nav button {
     height: 100%;
     font-size: 2.5rem !important;
     padding: 0 12px;
-    background: linear-gradient(240deg, #ecf0f3fd, #fff, #fff, #fff) !important;
-    transition: all .3s linear !important;
-}
-
-nav button:hover {
-    background: linear-gradient(290deg, #ecf0f3fd, #fff, #fff, #fff) !important;
+    background: transparent !important;
 }
 
 /* sidebar start */
@@ -89,7 +92,7 @@ nav button:hover {
 }
 
 #sidebar:hover {
-    background: url('../../images/background/8.jpg') no-repeat left !important;
+    background: url('../../images/background/8.jpg') no-repeat right !important;
     background-size: cover !important;
     transition: background 3s linear !important;
 }

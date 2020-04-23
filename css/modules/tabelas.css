@@ -92,6 +92,10 @@ td {
     width: 23.5%;
 }
 
+#tabelaCidade, #tabelaEstado, #tabelaPais {
+    display: none;
+}
+
 #tabelaPais td:nth-child(1) {
     width: 6%!important;
 }

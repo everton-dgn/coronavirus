@@ -17,5 +17,7 @@ export function clickFunction() {
 
     $("#sidebar").classList.toggle("collapsed");
     $("#content").classList.toggle("col-md-12");
-
+    $('nav').classList.toggle('changeMenu');
+    $('span.toggle-sidebar').classList.toggle('changeMenu');
+    $('button.toggle-sidebar').classList.toggle('changeMenu');
 }

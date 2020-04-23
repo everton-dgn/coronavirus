@@ -27,7 +27,6 @@
 
     #sidebar {
         position: fixed !important;
-        top: 12px !important;
         left: 0 !important;
         z-index: 999 !important;
         height: 100vh !important;

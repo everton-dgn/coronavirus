@@ -1,24 +1,21 @@
 import { $, $$ } from './help.js';
 
 // criação da tabela estado, filtro de pesquisa, paginação e manipulação do mapa:
+let pag = 0;
+let tamanhoPag = 10;
 let estados = [];
-let index2 = 0;
-let tamanhoDaPagina2 = 10;
 let tabela2 = $('[data-estado-altura]');
 let tabelaBody2 = $('#tabela-body2');
-let voltarInicioP2 = $('#voltarInicio2');
-let botaoProximo2 = $('#proximo2');
-let botaoAnterior2 = $('#anterior2');
-let irFinalP2 = $('#irFinal2');
-const urlEstado = "https://covid19-brazil-api.now.sh/api/report/v1";
 
-export async function pegaEstado() {
+$('#voltarInicio2').addEventListener("click", voltarInicio2);
+$('#proximo2').addEventListener("click", avancarPagina2);
+$('#anterior2').addEventListener("click", recuarPagina2);
+$('#irFinal2').addEventListener("click", irFinal2);
+
+(async function pegaEstado() {
     let spinner2 = $('#spinner2');
-    tabela2.style.display = "none";
 
-    let requisicao2 = await fetch(urlEstado);
-    let resultados2 = await requisicao2.json();
-    estados = resultados2.data;
+    estados = (await await fetch("https://covid19-brazil-api.now.sh/api/report/v1").then(res => res.json())).data;
 
     // pesquisar estado start //
     $("#pesquisarEstado").addEventListener("keyup", buscarEstado);
@@ -72,37 +69,33 @@ export async function pegaEstado() {
         });
 
     }
-}
-pegaEstado();
+})()
+
 function imprimirTabela2() {
     // limpa tabela dos estados antes de imprimir uma nova //
     tabelaBody2.innerHTML = "";
 
     // imprime tabela de estados 10 linhas por vez //
-    for (let i = index2; i < index2 + (tamanhoDaPagina2 < estados.length - index2 ? tamanhoDaPagina2 : estados.length % 10); i++) {
+    for (let i = pag; i < pag + (tamanhoPag < estados.length - pag ? tamanhoPag : estados.length % 10); i++) {
         tabelaBody2.innerHTML += '<tr title="' + estados[i].state + '"><td>' + estados[i].state + '</td>' + '<td>' + estados[i].cases.toLocaleString('pt-BR') + '</td>' + '<td>' + estados[i].deaths.toLocaleString('pt-BR') + '</td>' + '<td>' + parseFloat((estados[i].deaths * 100 / estados[i].cases).toFixed(1)) + '%' + '</td>' + '</tr>';
     }
 }
 function voltarInicio2() {
-    index2 = 0;
+    pag = 0;
     imprimirTabela2();
 }
 function avancarPagina2() {
-    if (index2 <= 10)
-        index2 += tamanhoDaPagina2;
+    if (pag <= 10)
+        pag += tamanhoPag;
     imprimirTabela2();
 }
 function recuarPagina2() {
-    if (index2 >= tamanhoDaPagina2)
-        index2 -= tamanhoDaPagina2;
+    if (pag >= tamanhoPag)
+        pag -= tamanhoPag;
     imprimirTabela2();
 }
 function irFinal2() {
-    if (index2 = 10)
-        index2 += tamanhoDaPagina2;
+    if (pag = 10)
+        pag += tamanhoPag;
     imprimirTabela2();
 }
-voltarInicioP2.addEventListener("click", voltarInicio2);
-botaoProximo2.addEventListener("click", avancarPagina2);
-botaoAnterior2.addEventListener("click", recuarPagina2);
-irFinalP2.addEventListener("click", irFinal2);
