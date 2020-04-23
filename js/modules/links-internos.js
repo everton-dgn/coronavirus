@@ -1,7 +1,7 @@
 import { $, $$ } from './help.js';
 
 // rolagem suave links internos:
-export const menuLinksInternos = $$('a[href^="#"]');
+const menuLinksInternos = $$('a[href^="#"]');
 
 if (menuLinksInternos.length) {
 

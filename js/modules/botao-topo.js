@@ -1,7 +1,7 @@
 import { $ } from './help.js';
 
 // voltar ao topo:
-export function botaoTopo() {
+function botaoTopo() {
     window.onscroll = function () {
         if (window.scrollY > 400) {
             $('[data-topo]').classList.add('mostrar');

@@ -4,7 +4,7 @@ import { $ } from './help.js';
 $('[data-aba-cidade]').addEventListener('click', () => openCity(event, 'abaCidade'));
 $('[data-aba-estado]').addEventListener('click', () => openCity(event, 'abaEstado'));
 $('[data-aba-pais]').addEventListener('click', () => openCity(event, 'abaPais'));
-export function openCity(evt, menuName) {
+function openCity(evt, menuName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {

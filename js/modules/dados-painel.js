@@ -1,7 +1,7 @@
 import { $ } from './help.js';
 
 // exibe dados do covid-19 do Brasil e do mundo no topo do site em 5 paineis //
-export async function dadosPainel() {
+async function dadosPainel() {
     let resposta = await fetch('https://corona-stats.online/brazil?format=json');
     let data = await resposta.json();
     

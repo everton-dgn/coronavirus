@@ -3,7 +3,7 @@ import { $$ } from './help.js';
 // lazyload   
 const container = $$('[data-left], [data-bottom]');
 const windowMetade = window.innerHeight * 0.6;
-export function lazyload() {
+function lazyload() {
     container.forEach((item) => {
         const sectionTop = item.getBoundingClientRect().top;
         const sectionVisivel = (sectionTop - windowMetade) < 0;

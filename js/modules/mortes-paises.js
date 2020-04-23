@@ -1,5 +1,5 @@
 // função para converter data
-export function converterData(dataPar) {
+function converterData(dataPar) {
     const dataRecebida = dataPar.replace('-', '/').replace('-', '/').replace('T', ' ').split(' ');
     const dataTratada = dataRecebida[0].split('/');
     const dataAtual = dataTratada[2].padStart(2, '0') + '/' + dataTratada[1].padStart(2, '0') + '/' + dataTratada[0];
@@ -8,7 +8,7 @@ export function converterData(dataPar) {
 }
 
 // Fornece dados dos países para alimentar os gráficos //
-export async function mortesPorPais() {
+async function mortesPorPais() {
     const resposta = await fetch('https://pomber.github.io/covid19/timeseries.json');
     const data = await resposta.json();
 
@@ -102,7 +102,7 @@ export async function mortesPorPais() {
 }
 
 // imprime gráficos com dados da api //
-export async function imprimirGraficos(mortes) {
+async function imprimirGraficos(mortes) {
     const mortesBrasil = await Promise.resolve(mortes);
 
     Chart.defaults.global.defaultFontFamily = "'Poppins', monospace, sans-serif";

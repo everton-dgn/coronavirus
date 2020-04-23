@@ -17,12 +17,21 @@ $('#irFinal').addEventListener("click", irFinal);
     // Busca os dados na API, converte em json e faz a desestruturação, retornando apenas a chave "values"
     let { values } = await fetch("https://api.coronaanalytic.com/journal").then(res => res.json());
 
+    let cidadesOrganizadas = []
+
     values.map(dados => { // map() retorna um array de 27 chaves sendo cada uma um array das cidades do estado //
         return dados.citys.map(cidade => { // Pega as cidades de cada estado
             cidade.estado = dados.state; // Adiciona a chave "estado" com a sigla do estado ao objeto
-            cidades.push(cidade);
+            cidadesOrganizadas.push(cidade);
         });
     });
+
+    // organiza lista de cidades em ordem decrescente de casos //
+    let enviarCidades = await cidadesOrganizadas.sort(ordenarPorIdade);
+    cidades.push(...enviarCidades);
+    function ordenarPorIdade(a, b) {
+        return b.cases - a.cases;
+    }
 
     imprimirTabela();
 
