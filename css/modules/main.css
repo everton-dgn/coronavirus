@@ -170,7 +170,6 @@ h6 {
 /* a faixa (barra de progresso) da barra de rolagem. */
 ::-webkit-scrollbar-track {
     background: #fff !important;
-    border-radius: 10px;
 }
 
 /* botão topo */
