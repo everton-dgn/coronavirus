@@ -46,7 +46,7 @@ async function mortesPorPais() {
     for (let i = 0; i < 184; i++) {
         totalMortesMundo += Object.entries(data)[i][1][data.Brazil.length - 1].deaths;
     }
-console.log(data.Brazil[99]);
+
     const morteMes = [
         [
             data.Brazil[9].deaths,

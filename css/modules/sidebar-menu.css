@@ -78,7 +78,7 @@ nav button {
 }
 
 #sidebar {
-    background: url('../../images/background/8.jpg') no-repeat center !important;
+    background: url('../../images/background/8.webp') no-repeat center !important;
     background-size: cover !important;
     margin-top: 0;
     height: 100vh !important;
@@ -92,7 +92,7 @@ nav button {
 }
 
 #sidebar:hover {
-    background: url('../../images/background/8.jpg') no-repeat right !important;
+    background: url('../../images/background/8.webp') no-repeat right !important;
     background-size: cover !important;
     transition: background 3s linear !important;
 }
