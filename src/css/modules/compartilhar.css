@@ -1,0 +1,141 @@
+/* botões de compartilhamento */
+[data-compartilhar] {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+[data-compartilhar] ul {
+    position: relative;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+[data-compartilhar] ul li {
+    margin: 12px 20px;
+}
+
+[data-compartilhar] ul li a .fa {
+    font-size: 20px;
+    color: #fff;
+    line-height: 40px;
+    transition: .5s;
+}
+
+[data-compartilhar] ul li a {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: #f1f1f1;
+    text-align: center;
+    transform: perspective(500px) rotate(-30deg) skew(10deg) translate(0, 0);
+    transition: .5s;
+    box-shadow: -10px 10px 5px rgba(0, 0, 0, .5);
+}
+
+[data-compartilhar] ul li a::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -10px;
+    height: 100%;
+    width: 10px;
+    background: #b1b1b1;
+    transition: .5s;
+    transform: rotate(0deg) skewY(-45deg);
+}
+
+[data-compartilhar] ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -5px;
+    height: 10px;
+    width: 100%;
+    background: #d8d8d8;
+    transition: .5s;
+    transform: rotate(0deg) skewX(-45deg);
+}
+
+[data-compartilhar] ul li a:hover {
+    transform: perspective(500px) rotate(-30deg) skew(10deg) translate(10px, -10px) !important;
+    box-shadow: -25px 25px 25px rgba(0, 0, 0, .5) !important;
+}
+
+[data-compartilhar] ul li:hover .fa {
+    color: #fff;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(1) a {
+    background: #25D366;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(1) a::before {
+    background: #1eb356;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(1) a::after {
+    background: #2be671;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(2) a {
+    background: #3b5999;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(2) a::before {
+    background: #304777;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(2) a::after {
+    background: #4970bf;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(3) a {
+    background: #34465d;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(3) a::before {
+    background: #212c3a;
+}
+
+[data-compartilhar] ul:nth-child(1) li:nth-child(3) a::after {
+    background: #475f7d;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(1) a {
+    background: #55acee;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(1) a::before {
+    background: #478abd;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(1) a::after {
+    background: #72c2ff;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(2) a {
+    background: #bd081c;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(2) a::before {
+    background: #960717;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(2) a::after {
+    background: #dc0921;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(3) a {
+    background: #0077B5;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(3) a::before {
+    background: #005a8a;
+}
+
+[data-compartilhar] ul:nth-child(2) li:nth-child(3) a::after {
+    background: #0093e0;
+}

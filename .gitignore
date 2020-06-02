@@ -1,0 +1,4 @@
+node_modules
+.vscode
+.ideia
+yarn-error.log

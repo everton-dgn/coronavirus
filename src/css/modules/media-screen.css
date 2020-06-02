@@ -1,0 +1,90 @@
+/* Ponto de responsividade max 880px */
+@media screen and (max-width: 800px) {
+
+    h1 {
+        font-size: 1.6rem !important;
+    }
+
+    h2 {
+        font-size: 1.2rem !important;
+    }
+
+    th {
+        font-size: .7rem !important;
+    }
+
+    td {
+        font-size: .7rem !important;
+    }
+
+    [data-titulo-banner] {
+        font-size: 1.8rem !important;
+    }
+
+    [data-subtitulo-banner] {
+        font-size: 1rem;
+    }
+
+    #sidebar {
+        position: fixed !important;
+        left: 0 !important;
+        z-index: 999 !important;
+        height: 100vh !important;
+        max-width: 250px !important;
+    }
+
+    #sidebar .fa {
+        width: 20px;
+    }
+
+    [data-left-icones] h5 {
+        display: grid !important;
+    }
+
+    ::-webkit-input-placeholder {
+        font-size: .7rem !important;
+    }
+
+    [data-lupa] {
+        padding: 5px 13px !important;
+    }
+
+    .table td,
+    .table th {
+        padding: .2rem .75rem !important;
+    }
+
+    #pesquisarEstado,
+    #pesquisarPais,
+    #pesquisarCidade {
+        padding: 4px 20px 4px 40px !important;
+    }
+
+    .paginacao button {
+        font-size: .8rem !important;
+    }
+
+    [data-ajuste-h-graph] {
+        height: 550px;
+    }
+
+    [data-info-mapa] h1 {
+        font-size: 1.6rem;
+    }
+
+    [data-mapa-width] {
+        width: 100%;
+    }
+
+}
+
+/* Ponto de responsividade max 992px */
+@media screen and (max-width: 992px) {
+    [data-subtitulo-banner]:nth-child(2) {
+        text-align: left;
+    }
+
+    #sidebar ul li {
+        font-size: .7rem;
+    }
+}
