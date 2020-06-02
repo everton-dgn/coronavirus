@@ -2,7 +2,7 @@
 
 ### Feito com html, css, bootstrap e javascript.
 
-## Apresentação:
+## Apresentação
 
 Este projeto tem como objetivo principal ajudar as pessoas promovendo informações sobre o COVID-19 (novo Coronavírus no Brasil).
 
@@ -12,9 +12,11 @@ https://www.youtube.com/watch?v=Nbh3UVfmS9I&t=4s
 <b>- Link para visualização:</b> <br>
 https://querocriarsite.com/projetos/coronavirus/ 
 
-## Features:
+## Features
 
 - [x] Projeto 100% responsivo.
+
+- [x] PWA integrado, podendo ser acessado offline.
 
 - [x] Foram utilizadas 4 API: <br>
 https://corona-stats.online/brazil?format=json <br>
@@ -32,7 +34,35 @@ https://api.coronaanalytic.com/journal <br>
 
 - [x] Possui links úteis de sites referência em informações sobre COVID-19.
 
-## Imagens do Projeto:
+## Instruções
+
+Todos comandos devem ser executados no terminal na pasta do projeto.
+
+<b>- Instalar dependências:</b>
+
+```
+yarn
+```
+
+<b>- Criar build de produção na pasta *dist* com arquivos otimizados para performance e para compatibilidade com navegadores antigos:</b>
+
+```
+yarn build
+```
+
+<b>- Iniciar servidor local a partir da pasta *src* de desenvolvimento, monitorando e atualizando alterações em tempo real:</b>
+
+```
+yarn dev
+```
+
+<b>- Iniciar servidor local a partir da pasta *dist* de  produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via intranet em diversos dispositivos:</b>
+
+```
+yarn server
+```
+
+## Imagens do Projeto
 
 ![Imagem do projeto](https://github.com/querocriarsite/coronavirus/blob/master/screenshot/Screenshot1.jpg)
 
@@ -42,7 +72,7 @@ https://api.coronaanalytic.com/journal <br>
 
 ![Imagem do projeto](https://github.com/querocriarsite/coronavirus/blob/master/screenshot/Screenshot4.jpg)
 
-## Autoria:
+## Autoria
 
 Éverton Toffanetto
 
