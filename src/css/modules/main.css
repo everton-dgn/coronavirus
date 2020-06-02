@@ -163,7 +163,7 @@ h6 {
     border-radius: 10px;
 }
 
-/* a faixa (barra de progresso) da barra de rolagem. */
+/* a faixa (barra de progresso) da barra de rolagem */
 ::-webkit-scrollbar-track {
     background: #fff !important;
 }
