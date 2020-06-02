@@ -30,7 +30,7 @@ https://api.coronaanalytic.com/journal <br>
 
 - [x] Permite encontrar e filtrar informações sobre COVID-19 por cidade, estado e país.
 
-- [x] Possui links úteis de sites referência em informações sobre COVIS-19.
+- [x] Possui links úteis de sites referência em informações sobre COVID-19.
 
 ## Imagens do Projeto:
 
