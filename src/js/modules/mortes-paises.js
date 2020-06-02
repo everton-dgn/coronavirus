@@ -50,37 +50,42 @@ async function mortesPorPais() {
     const morteMes = [
         [
             data.Brazil[9].deaths,
-            data.Brazil[29].deaths,
+            data.Brazil[49].deaths,
             data.Brazil[69].deaths,
             data.Brazil[99].deaths,
+            data.Brazil[129].deaths,
             data.Brazil[data.Brazil.length - 1].deaths,
         ],
         [
             data.China[9].deaths,
-            data.China[29].deaths,
+            data.China[49].deaths,
             data.China[69].deaths,
             data.China[99].deaths,
+            data.China[129].deaths,
             data.China[data.Brazil.length - 1].deaths,
         ],
         [
             data.US[9].deaths,
-            data.US[29].deaths,
+            data.US[49].deaths,
             data.US[69].deaths,
             data.US[99].deaths,
+            data.US[129].deaths,
             data.US[data.Brazil.length - 1].deaths,
         ],
         [
             data.Italy[9].deaths,
-            data.Italy[29].deaths,
+            data.Italy[49].deaths,
             data.Italy[69].deaths,
             data.Italy[99].deaths,
+            data.Italy[129].deaths,
             data.Italy[data.Brazil.length - 1].deaths,
         ],
         [
             data.Spain[9].deaths,
-            data.Spain[29].deaths,
+            data.Spain[49].deaths,
             data.Spain[69].deaths,
             data.Spain[99].deaths,
+            data.Spain[129].deaths,
             data.Spain[data.Brazil.length - 1].deaths,
         ]
     ];
@@ -296,12 +301,12 @@ async function imprimirGraficos(mortes) {
     new Chart(ctx2, {
         type: 'bar',
         data: {
-            labels: ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO'],
+            labels: ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO'],
             datasets: [{
                 label: 'Brasil',
                 data: mortesBrasil[5][0],
                 backgroundColor: [
-                    'green', 'green', 'green', 'green', 'green'
+                    'green', 'green', 'green', 'green', 'green', 'green'
                 ],
                 borderColor: 'green',
             },
@@ -309,7 +314,7 @@ async function imprimirGraficos(mortes) {
                 label: 'China',
                 data: mortesBrasil[5][1],
                 backgroundColor: [
-                    'red', 'red', 'red', 'red', 'red'
+                    'red', 'red', 'red', 'red', 'red', 'red'
                 ],
                 borderColor: 'red',
                 // borderColor: '#000',
@@ -320,7 +325,7 @@ async function imprimirGraficos(mortes) {
                 label: 'Estados Unidos',
                 data: mortesBrasil[5][2],
                 backgroundColor: [
-                    'blue', 'blue', 'blue', 'blue', 'blue'
+                    'blue', 'blue', 'blue', 'blue', 'blue', 'blue'
                 ],
                 borderColor: 'blue',
             },
@@ -328,7 +333,7 @@ async function imprimirGraficos(mortes) {
                 label: 'Itália',
                 data: mortesBrasil[5][3],
                 backgroundColor: [
-                    'orange', 'orange', 'orange', 'orange', 'orange'
+                    'orange', 'orange', 'orange', 'orange', 'orange', 'orange'
                 ],
                 borderColor: 'orange',
             },
@@ -336,7 +341,7 @@ async function imprimirGraficos(mortes) {
                 label: 'Espanha',
                 data: mortesBrasil[5][4],
                 backgroundColor: [
-                    'blueviolet', 'blueviolet', 'blueviolet', 'blueviolet', 'blueviolet'
+                    'blueviolet', 'blueviolet', 'blueviolet', 'blueviolet', 'blueviolet', 'blueviolet'
                 ],
                 borderColor: 'blueviolet',
             }]
@@ -347,7 +352,7 @@ async function imprimirGraficos(mortes) {
                 labels: {
                     render: 'value',
                     // macete pra n~eo exibir valores acima das barras:
-                    fontColor: ['transparent', 'transparent', 'transparent', 'transparent', 'transparent'],
+                    fontColor: ['transparent', 'transparent', 'transparent', 'transparent', 'transparent', 'transparent'],
                     precision: 2,
                 },
             },

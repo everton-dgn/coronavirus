@@ -10,3 +10,6 @@ import { } from './js/modules/tabela-cidade.js';
 import { } from './js/modules/tabela-estado.js';
 import { } from './js/modules/tabela-pais.js';
 import { } from './js/modules/botao-topo.js';
+
+// pwa //
+navigator.serviceWorker && !location.href.includes('localhost') && navigator.serviceWorker.register('./sw.js');
