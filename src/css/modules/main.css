@@ -12,10 +12,6 @@
     font-display: swap;
   }
 
-body, html {
-    scroll-behavior: smooth!important;
-}
-
 body {
     background: #f4f5fa !important;
 }
