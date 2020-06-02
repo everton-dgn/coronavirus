@@ -156,7 +156,7 @@ h6 {
     display: none !important;
 }
 
-/* a alça de rolagem arrastável. */
+/* a alça de rolagem arrastável */
 ::-webkit-scrollbar-thumb {
     background: #212529;
     border: 1px solid #fff !important;
