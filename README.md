@@ -16,15 +16,19 @@ https://querocriarsite.com/projetos/coronavirus/
 
 - [x] Projeto 100% responsivo.
 
-- [x] PWA integrado, podendo ser acessado offline.
+- [x] Feito no formato PWA, podendo ser acessado offline.
 
 - [x] Foram utilizadas 4 API: <br>
+
 https://corona-stats.online/brazil?format=json <br>
+
 https://covid19-brazil-api.now.sh/api/report/v1 <br>
+
 https://pomber.github.io/covid19/timeseries.json <br>
+
 https://api.coronaanalytic.com/journal <br>
 
-- [x] Atualiza todo os dados em tempo real.
+- [x] Atualização de dados em tempo real.
 
 - [x] Contém informações relevantes baseadas no site do Ministério da Saúde sobre o COVID-19, como por exemplo: o que é COVID-19, seus sintomas, formas de prevenção e tratamento.
 
@@ -56,7 +60,7 @@ yarn build
 yarn dev
 ```
 
-<b>- Iniciar servidor local a partir da pasta *dist* de  produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via intranet em diversos dispositivos:</b>
+<b>- Iniciar servidor local a partir da pasta *dist* de produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via internet local em diversos dispositivos:</b>
 
 ```
 yarn server
