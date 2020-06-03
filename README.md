@@ -40,27 +40,19 @@ Todos comandos devem ser executados no terminal na pasta do projeto.
 
 <b>- Instalar dependências:</b>
 
-```
-yarn
-```
+'yarn'
 
 <b>- Criar build de produção na pasta *dist* com arquivos otimizados para performance e para compatibilidade com navegadores antigos:</b>
 
-```
-yarn build
-```
+'yarn build'
 
 <b>- Iniciar servidor local a partir da pasta *src* de desenvolvimento, monitorando e atualizando alterações em tempo real:</b>
 
-```
-yarn dev
-```
+'yarn dev'
 
 <b>- Iniciar servidor local a partir da pasta *dist* de  produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via intranet em diversos dispositivos:</b>
 
-```
-yarn server
-```
+'yarn server'
 
 ## Imagens do Projeto
 
