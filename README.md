@@ -58,7 +58,9 @@ yarn dev
 
 <b>- Iniciar servidor local a partir da pasta *dist* de  produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via intranet em diversos dispositivos:</b>
 
-``` yarn server ```
+```
+yarn server
+```
 
 ## Imagens do Projeto
 
