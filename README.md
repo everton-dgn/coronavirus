@@ -42,25 +42,25 @@ https://api.coronaanalytic.com/journal <br>
 
 Todos comandos devem ser executados no terminal na pasta do projeto.
 
-<b>- Instalar dependências:</b>
+- Instalar dependências:
 
 ```
 yarn
 ```
 
-<b>- Criar build de produção na pasta *dist* com arquivos otimizados para performance e para compatibilidade com navegadores antigos:</b>
+- Criar build de produção na pasta <b>*dist*</b> com arquivos otimizados para performance e para compatibilidade com navegadores antigos:
 
 ```
 yarn build
 ```
 
-<b>- Iniciar servidor local a partir da pasta *src* de desenvolvimento, monitorando e atualizando alterações em tempo real:</b>
+- Iniciar servidor local a partir da pasta <b>*src*</b> de desenvolvimento, monitorando e atualizando alterações em tempo real:
 
 ```
 yarn dev
 ```
 
-<b>- Iniciar servidor local a partir da pasta *dist* de produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via internet local em diversos dispositivos:</b>
+- Iniciar servidor local a partir da pasta <b>*dist*</b> de produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via internet local em diversos dispositivos:
 
 ```
 yarn server
