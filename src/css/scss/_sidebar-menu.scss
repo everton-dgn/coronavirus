@@ -1,0 +1,141 @@
+/* barra superior horizontal de navegação */
+nav {
+    height: 60px;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    background: #ffffffe6;
+    z-index: 9999;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 0 0 6px 0;
+    box-shadow: 8px 8px 24px rgba(62, 57, 107, .2) !important;
+}
+
+.changeMenu {
+    background: transparent;
+    box-shadow: none!important;
+    color: #fff!important;
+    text-shadow: 1px 1px 6px #000;
+}
+
+nav span {
+    color: #212529;
+    font-size: 1.5rem;
+    margin: 0 15px 0 8px !important;
+    cursor: pointer;
+}
+
+nav button {
+    border: none;
+    height: 100%;
+    font-size: 2.5rem !important;
+    padding: 0 12px;
+    background: transparent !important;
+}
+
+/* sidebar start */
+#row-main {
+    overflow-x: hidden;
+}
+
+#content {
+    transition: all 0.3s ease !important;
+}
+
+#content .btn-group {
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    width: inherit;
+    padding: 20px 10px 10px;
+    margin-top: 60px;
+}
+
+#sidebar ul li {
+    border-bottom: 1px solid #ffffff42;
+    padding: 12px 10px;
+    color: #fff;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 6px #000;
+    display: flex;
+    align-items: baseline;
+    transition: all .15s linear;
+}
+
+#sidebar ul li:hover {
+    padding-left: 15px;
+}
+
+#sidebar .fa {
+    width: 28px;
+}
+
+.col-md-9 .width-12,
+.col-md-12 .width-9 {
+    display: none;
+}
+
+#sidebar {
+    background: url('../../images/background/8.webp') no-repeat center !important;
+    background-size: cover !important;
+    margin-top: 0;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    top: 0;
+    left: 0;
+    position: sticky;
+    box-shadow: inset -15px -14px 22px 0px #00000094, 3px 0 16px #050a25bf;
+    z-index: 999 !important;
+    transition: background 3s linear !important;
+}
+
+#sidebar:hover {
+    background: url('../../images/background/8.webp') no-repeat right !important;
+    background-size: cover !important;
+    transition: background 3s linear !important;
+}
+
+.collapsed {
+    max-width: 0 !important;
+    opacity: 0 !important;
+    padding: 0 !important;
+    transform: translateX(-200%) !important;
+    transition: all .3s ease !important;
+}
+
+#sidebar button {
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    font-size: 17px;
+}
+
+#installApp {
+    display: none;
+    padding: 14px 0;
+    background: #f4f5fa;
+    text-align: center;
+    text-shadow: none !important;
+    color: #42939c !important;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: .3s;
+}
+
+#installApp:hover {
+    background: #f4f5fab8!important;
+    color: #703039!important;
+    cursor: pointer;
+}
+
+// #sidebar ul li#installApp {
+//     display: none;
+// }
+/* sidebar the and */

@@ -1,6 +1,6 @@
 // “powered by ecomplato carros”
 
-const CACHE_NAME = 'webapp_ecompleto_cache'
+const CACHE_NAME = 'webapp_covid_cache'
 const CACHING_DURATION = 15 * 600
 const BLACK_LIST = /(google|gstatic)/
 

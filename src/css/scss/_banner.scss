@@ -1,0 +1,54 @@
+/* banner topo */
+[data-paralax] {
+    background: url('../../images/background/1.webp') no-repeat top !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    height: 400px !important;
+    display: flex !important;
+    align-items: center !important;
+    box-shadow: inset 0px -14px 22px 0px #20243ad4 !important;
+    transition: background 10s linear !important;
+}
+
+[data-paralax]:hover {
+    background: url('../../images/background/1.webp') no-repeat bottom !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+}
+
+[data-subtitulo-banner] {
+    color: #fbff00 !important;
+    text-shadow: 1px 1px 5px #000;
+}
+
+[data-titulo-banner] {
+    text-shadow: 1px 1px 5px #000;
+    font-size: 3rem;
+}
+
+[data-titulo-secao] {
+    background: #fff;
+    color: #3548ef;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 1px 6px 17px #00000075;
+}
+
+[data-date] {
+    color: #fff !important;
+}
+
+[data-banner-bg] {
+    background: #00000040;
+    border-radius: 4px;
+    padding-top: 20px;
+}
+
+[data-mapa-width] {
+    width: 50%;
+    margin: 0 auto;
+}
+
+[data-subtitulo-banner]:nth-child(2) {
+    text-align: right;
+}

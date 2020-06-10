@@ -1,0 +1,98 @@
+/* seção paineis topo */
+[data-img-br] {
+    border-radius: 2px;
+    margin-bottom: 4px;
+}
+
+.fa-globe {
+    color: #003cab;
+}
+
+/* seção informações */
+[data-informacoes-covid] p img.float-left {
+    margin-right: 10px !important;
+}
+
+[data-informacoes-covid] p img {
+    width: 64px;
+    height: 64px;
+    margin-left: 10px;
+}
+
+[data-sintomas] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+[data-sintomas] div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+/* seção links úteis */
+[data-link-uteis] {
+    border-radius: 4px;
+    padding: 10px;
+    margin: 20px !important;
+}
+
+[data-link-uteis] li {
+    line-height: 36px !important;
+}
+
+[data-link-uteis] li a {
+    color: #f7a047 !important;
+}
+
+/* footer */
+footer {
+    background: url('../../images/background/5.webp') no-repeat top !important;
+    background-size: cover !important;
+    padding: 50px 0;
+    transition: background 40s linear !important;
+}
+
+footer:hover {
+    background: url('../../images/background/5.webp') no-repeat bottom !important;
+    background-size: cover !important;
+    transition: background 40s linear !important;
+}
+
+footer .fa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background: #5b2933;
+    color: #fff;
+    margin: 5px;
+    font-size: 1.4rem;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 15px #1a182ca8 !important;
+    transition: all .3s linear !important;
+}
+
+footer .fa:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 6px 20px #12111fe3 !important;
+}
+
+footer p {
+    color: #fff;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.76);
+}
+
+footer p img {
+    filter: brightness(30) drop-shadow(0 3px 4px #222222c9);
+    transition: all .3s linear !important;
+}
+
+footer p img:hover {
+    filter: brightness(30) drop-shadow(0 9px 8px #000000e7);
+    transform: translateY(-5px) !important;
+}

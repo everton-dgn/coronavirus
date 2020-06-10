@@ -1,0 +1,46 @@
+/* seção mapa */
+[data-info-mapa] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    background: url('../../images/background/3.webp') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+/* mapa svg */
+#svg-map path {
+    fill: #3548ef;
+    transition: .3s;
+}
+
+#svg-map text {
+    fill: #fff;
+    font: 12px Arial-BoldMT, sans-serif;
+    cursor: pointer
+}
+
+#svg-map a {
+    text-decoration: none
+}
+
+#svg-map a:hover {
+    cursor: pointer;
+    text-decoration: none
+}
+
+#svg-map a:hover path {
+    fill: #0b1dbe !important
+}
+
+#svg-map .circle {
+    fill: #8995ff
+}
+
+#svg-map a:hover .circle {
+    fill: #0b1dbe !important;
+    cursor: pointer
+}

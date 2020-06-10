@@ -1,0 +1,223 @@
+* {
+    box-sizing: border-box !important;
+    list-style: none !important;
+    text-decoration: none !important;
+    outline: none !important;
+    font-family: 'Poppins', monospace, sans-serif;
+}
+
+@font-face {
+    font-family: 'Poppins', monospace, sans-serif;
+    src: local('Arial'), url(https://fonts.googleapis.com/css2?family=Poppins:300;600;700&display=swap) format('woff2');
+    font-display: swap;
+}
+
+body {
+    background: #f4f5fa !important;
+}
+
+/* ajustes gerais de estilo */
+[data-border-left] {
+    border-left: 2px solid #212529;
+}
+
+.shadow-box {
+    box-shadow: 0 1px 15px 1px #3e396b12 !important;
+}
+
+.blue {
+    color: #36b9cc;
+}
+
+.red {
+    color: #dc3545;
+}
+
+.lilas {
+    color: #b876e2;
+}
+
+.orange {
+    color: #ffa74c;
+}
+
+.green {
+    color: #1cc88a;
+}
+
+.violet {
+    color: #4e73df;
+}
+
+.pink {
+    color: #d346b1;
+}
+
+.bluedark {
+    color: #08315a;
+}
+
+.greydark {
+    color: #374079;
+}
+
+.azulface {
+    color: #0077cc;
+}
+
+.border-azulface {
+    border-left: 4px solid #0077cc;
+}
+
+.border-greydark {
+    border-left: 4px solid #374079;
+}
+
+.border-bluedark {
+    border-left: 4px solid #08315a;
+}
+
+.border-blue {
+    border-left: 4px solid #36b9cc;
+}
+
+.border-red {
+    border-left: 4px solid #dc3545;
+}
+
+.border-orange {
+    border-left: 4px solid #ffa74c;
+}
+
+.border-green {
+    border-left: 4px solid #1cc88a;
+}
+
+.border-violet {
+    border-left: 4px solid #4e73df;
+}
+
+.border-pink {
+    border-left: 4px solid #d346b1;
+}
+
+.border-lilas {
+    border-left: 4px solid #b876e2;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0 !important;
+}
+
+h1,
+h3 {
+    text-align: center;
+}
+
+h6 {
+    text-transform: uppercase;
+    font-size: .9rem !important;
+    margin-bottom: 10px !important;
+}
+
+[data-efeito-hover] {
+    transition: all .3s linear;
+}
+
+[data-efeito-hover]:hover {
+    transform: translate(0, -5px) !important;
+    box-shadow: 0 14px 24px rgba(62, 57, 107, .2) !important;
+}
+
+[data-heigt-graph] {
+    height: 450px !important;
+    margin-top: 30px;
+}
+
+/* a barra de rolagem. */
+::-webkit-scrollbar {
+    width: 7px !important;
+    border-radius: 10px;
+}
+
+/* os botões na barra de rolagem (setas apontando para cima e para baixo). */
+::-webkit-scrollbar-button {
+    display: none !important;
+}
+
+/* a alça de rolagem arrastável */
+::-webkit-scrollbar-thumb {
+    background: #212529;
+    border: 1px solid #fff !important;
+    border-radius: 10px;
+}
+
+/* a faixa (barra de progresso) da barra de rolagem */
+::-webkit-scrollbar-track {
+    background: #fff !important;
+}
+
+/* botão topo */
+.mostrar {
+    display: block !important;
+    animation: topo 1s forwards;
+}
+
+[data-topo] {
+    display: none;
+}
+
+[data-topo] img {
+    width: 45px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    filter: grayscale(3) invert(1) brightness(1)
+}
+
+#spinner,
+#spinner2,
+#spinner3 {
+    display: flex;
+    justify-content: center;
+}
+
+/* animações */
+@keyframes topo {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+[data-left] {
+    opacity: 0;
+    transition: all .4s linear;
+    transform: translate3d(-30px, 0, 0);
+}
+
+[data-bottom] {
+    opacity: 0;
+    transition: all .4s linear;
+    transform: translate3d(0, 30px, 0);
+}
+
+.animar {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+}

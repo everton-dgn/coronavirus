@@ -10,7 +10,7 @@ Este projeto tem como objetivo principal ajudar as pessoas promovendo informaç�
 https://www.youtube.com/watch?v=Nbh3UVfmS9I&t=4s
 
 <b>- Link para visualização:</b> <br>
-https://querocriarsite.com/projetos/coronavirus/ 
+https://querocriarsite.com/projetos/coronavirus/
 
 ## Features
 
@@ -48,19 +48,19 @@ Todos comandos devem ser executados no terminal na pasta do projeto.
 yarn
 ```
 
-- Criar build de produção na pasta <b>*dist*</b> com arquivos otimizados para performance e para compatibilidade com navegadores antigos:
+- Criar build de produção na pasta <b>*dist*</b> com arquivos otimizados:
 
 ```
 yarn build
 ```
 
-- Iniciar servidor local a partir da pasta <b>*src*</b> de desenvolvimento, monitorando e atualizando alterações em tempo real:
+- Criar build de desenvolvimento na pasta <b>*dist*</b>:
 
 ```
 yarn dev
 ```
 
-- Iniciar servidor local a partir da pasta <b>*dist*</b> de produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via internet local em diversos dispositivos:
+- Iniciar servidor local a partir da pasta <b>*dist*</b> de produção, monitorando e atualizando alterações em tempo real com link que pode ser acessado via internet local:
 
 ```
 yarn server

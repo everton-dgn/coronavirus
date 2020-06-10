@@ -1,0 +1,21 @@
+root = true
+
+[*]
+charset = utf-8
+indent_size = 4
+indent_style = space
+insert_final_newline = false
+trim_trailing_whitespace = true
+end_of_line = lf
+trim_trailing_whitespace = true
+max_line_length = 80
+
+# [*.css]
+# indent_style = space
+
+# [*.php]
+# indent_style = tab
+
+# [*.{js,txt,md,css,html,php,py,json,yml,sass,pug}]
+# indent_style = tab
+# indent_size = 2
