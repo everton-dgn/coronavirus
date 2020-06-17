@@ -1,4 +1,4 @@
-![GitHub](https://img.shields.io/github/license/querocriarsite/coronavirus?style=plastic)
+![GitHub](https://img.shields.io/github/license/querocriarsite/coronavirus/blob/master/LICENSE?style=plastic)
 
 # PROJETO COVID-19
 
