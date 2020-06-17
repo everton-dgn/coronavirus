@@ -1,3 +1,5 @@
+![GitHub](https://img.shields.io/github/license/querocriarsite/coronavirus?style=plastic)
+
 # PROJETO COVID-19
 
 ### Feito com html, css, bootstrap e javascript.
