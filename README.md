@@ -1,6 +1,8 @@
-<a href="./LICENSE">![GitHub](https://img.shields.io/github/license/querocriarsite/coronavirus?style=plastic)</a>
+<a href="./LICENSE">![GitHub](https://img.shields.io/github/license/everton-dgn/coronavirus?style=plastic)</a> 
+![GitHub repo size](https://img.shields.io/github/repo-size/everton-dgn/coronavirus?style=plastic) 
+![GitHub Repo stars](https://img.shields.io/github/stars/everton-dgn/coronavirus?color=yellow&style=plastic)
 
-# PROJETO COVID-19
+<h1 align="center">COVID-19</h1>
 
 ### Feito com html, css, bootstrap e javascript.
 
