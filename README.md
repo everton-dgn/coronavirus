@@ -14,7 +14,7 @@ Este projeto tem como objetivo principal ajudar as pessoas promovendo informaç�
 https://www.youtube.com/watch?v=Nbh3UVfmS9I&t=4s
 
 <b>- Link para visualização:</b> <br>
-https://querocriarsite.com/projetos/coronavirus/
+https://coronavirus.querocriarsite.com/
 
 ## Features
 
